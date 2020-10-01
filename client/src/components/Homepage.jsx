@@ -14,13 +14,20 @@ const Border = styled.div`
 
 const Title = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  align-content: center;
 `;
 
-const SecondRow = styled.div`
-  width: 625px;
+const Row = styled.div`
+  width: 550px;
   display: flex;
-  padding: 20px 50px 0px 0px
+  flex-direction: row;
+  padding: 20px 0px 0px 0px;
+  gap: 35px
+`;
+
+const Column = styled.div`
+  flex: ${(props) => props.size}
 `;
 
 function Homepage() {
@@ -31,10 +38,14 @@ function Homepage() {
           <h2>Make a Reservation</h2>
         </Title>
         <Calendar />
-        {/* <SecondRow>
-          <ReservationTimes />
-          <People />
-        </SecondRow> */}
+        <Row>
+          <Column size={1}>
+            <ReservationTimes />
+          </Column>
+          <Column size={1}>
+            <People />
+          </Column>
+        </Row>
       </Border>
     </div>
   );

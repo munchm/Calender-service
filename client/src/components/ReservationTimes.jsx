@@ -2,28 +2,100 @@ import React, { useState, useEffect } from 'React';
 import styled, { css } from 'styled-components';
 
 const Border = styled.div`
-  width: 300px;
-  padding: 10px 10px 5px 10px;
+  width: 225px;
+  padding: 20px 45px 20px 10px;
   border: 2px solid black;
-  box-shadow: 2px 2px 2px #eee;
   align-contents: center;
 `;
 
-function ReservationTimes() {
-  const times = ['9:00 am', '10:00 am', '11:00 am', '12:00 pm', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm', '8:00 pm', '9:00 pm'];
+const Header = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px 10px 5px 10px;
+  display: flex;
+`;
 
-  // const [showTime, setShowTime] = useState(false);
-  // const toggle = () => setShowTime(!showTime);
+const Option = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 10px 5px 10px;
+  display: flex;
+  cursor: pointer;
+  &:hover {
+    background: lightgrey;
+  }
 
-  return (
-    <Border>
-      <select>
-        {times.map((time) => (
-          <option value={time}>Time</option>
-        ))}
-      </select>
-    </Border>
-  );
+  ${(props) => props.selected && css`
+    background-color: #00FFFF;
+    color: white;
+  `}
+`;
+
+class ReservationTime extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      time: 9,
+      choice: '',
+      open: false,
+    };
+    this.handleChoice = this.handleChoice.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+  }
+
+  handleOpen() {
+    this.setState({
+      open: !this.state.open
+    })
+  }
+
+  handleChoice(time) {
+    this.setState({
+      choice: time
+    })
+  }
+
+  render() {
+    const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+    return (
+      <Border>
+        <div>
+
+          <Header
+            tabIndex={0}
+            role="button"
+            onClick={this.handleOpen}
+          >
+            <strong value={this.state.time}> {this.state.time} PM</strong>
+          </Header>
+          <div>
+            {this.state.open && (
+              <div>
+
+                {times.map((time, index) => {
+                  const chosen = time
+                  return (
+                    <Option
+                      key={index}
+                      selected={chosen === this.state.choice}
+                      onClick={() => this.handleChoice(chosen)}
+                    >
+                      {chosen <= 12 ?
+                      <strong>{time}:00 AM</strong> :
+                      <strong>{time - 12}:00 PM</strong>
+                      }
+                    </Option>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+      </Border>
+    );
+  }
 }
 
-export default ReservationTimes;
+export default ReservationTime;
+
+

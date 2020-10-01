@@ -10,15 +10,13 @@ import styled, { css } from 'styled-components';
 const Frame = styled.div`
   width: 600px;
   border: 2px solid black;
-  box-shadow: 2px 2px 2px #eee;
-  padding: 10px 10px 5px 10px;
+  padding: 10px 10px 20px 10px;
   align-contents: center;
 `;
 
 const Border = styled.div`
   width: 600px;
   border: 1px solid lightgrey;
-  box-shadow: 2px 2px 2px #eee;
 `;
 
 const Header = styled.div`
@@ -27,7 +25,6 @@ const Header = styled.div`
   padding: 10px 10px 5px 10px;
   display: flex;
   justify-content: space-between;
-  background-color: #f5f6fa;
 `;
 
 const Body = styled.div`
@@ -46,6 +43,9 @@ const DayBody = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  &:hover {
+    background: lightgrey;
+  }
 
   ${(props) => props.isToday && css`
     border: 1px solid #eee;
@@ -90,14 +90,12 @@ class Calendar extends Component {
   // }
 
   handleNewDate(currentDay, currentMonth, currentYear) {
-    console.log(currentDay, currentMonth)
     this.setState({
       today: new Date(currentYear, currentMonth, currentDay)
     })
   }
 
   render() {
-    console.log()
     function firstDayOfMonth(date) {
       return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
     }
@@ -113,6 +111,7 @@ class Calendar extends Component {
     const year = date.getFullYear();
     const startDay = firstDayOfMonth(date)
     console.log(todaysDate)
+
     return (
       <Frame>
         <Header
@@ -149,6 +148,7 @@ class Calendar extends Component {
 
                 {Array(lastDays[month] + (startDay - 1)).fill(null).map((_, index) => {
                   const specificDay = index - (startDay - 2)
+                  console.log(specificDay)
                   return (
                     <DayBody
                       key={index}
