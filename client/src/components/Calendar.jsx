@@ -4,7 +4,7 @@
 /* eslint-disable prefer-template */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react/prefer-stateless-function */
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
 const Frame = styled.div`
@@ -36,7 +36,10 @@ const Body = styled.div`
   flex-wrap: wrap;
 `;
 
-const Day = styled.div`
+const Button = styled.div`
+  cursor: pointer;
+`
+const DayBody = styled.div`
   width: 14.2%;
   height: 40px;
   display: flex;
@@ -52,97 +55,118 @@ const Day = styled.div`
     background-color: #ff0000`}
 `;
 
-function Calendar() {
-  const lastDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  const daysOfTheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const year = 2020;
 
-  function firstDayOfMonth(date) {
-    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+
+class Calendar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      today: new Date(),
+      selectedDate: '',
+      open: false
+    }
+    this.handleToggle = this.handleToggle.bind(this);
+    // this.handleNextMonth = this.handleNextMonth.bind(this);
+    // this.handlePreviousMonth = this.handlePreviousMonth.bind(this);
+    this.handleNewDate = this.handleNewDate.bind(this);
   }
 
-  const today = new Date();
-  const [date, setDate] = useState(today);
-  const [day, setDay] = useState(date.getDate());
-  const [month, setMonth] = useState(date.getMonth());
-  const [startDay, setStartDay] = useState(firstDayOfMonth(date));
-  const [open, setOpen] = useState(false);
+  handleToggle() {
+    this.setState({
+      open: !this.state.open
+    })
+  }
 
-  const toggle = () => setOpen(!open);
+  // handlePreviousMonth() {
+  //   this.setState({
+  //     date: new Date(this.state.year, this.state.month -  1, this.state.days)
+  //   })
+  // }
 
-  useEffect(() => {
-    setDay(date.getDate());
-    setMonth(date.getMonth());
-    setStartDay(firstDayOfMonth(date));
-  });
+  // handleNextMonth() {
+  //   this.setState({
+  //     date: new Date(this.state.year, this.state.month + 1, this.state.days)
+  //   })
+  // }
 
-  // console.log(
-  //   'date: ' + date,
-  //   'day: ' + day,
-  //   'month: ' + month,
-  //   'startDay: ' + startDay,
-  // );
+  handleNewDate(currentDay, currentMonth, currentYear) {
+    console.log(currentDay, currentMonth)
+    this.setState({
+      today: new Date(currentYear, currentMonth, currentDay)
+    })
+  }
 
-  // console.log('date: ' + date);
-  return (
-    <Frame
-      onClick={() => toggle(!open)}
+  render() {
+    console.log()
+    function firstDayOfMonth(date) {
+      return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    }
 
-    >
-      <Header
-        tabIndex={0}
-        role="button"
-        onKeyPress={() => toggle(!open)}
-        onClick={() => toggle(!open)}
-      >
-        <div>
+    const lastDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const daysOfTheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-          <p>{open ? months[month] + ' ' + day : months[month] + ' ' + day}</p>
+    const todaysDate = new Date();
+    const date = this.state.today;
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const startDay = firstDayOfMonth(date)
+    console.log(todaysDate)
+    return (
+      <Frame>
+        <Header
+          tabIndex={0}
+          role="button"
+          onKeyPress={this.handleToggle}
+          onClick={this.handleToggle}
+        >
+          <div>
+            <p>{months[month] + ' ' + day}</p>
+          </div>
+        </Header>
+        <div className="calendarDropDown">
+
+          {this.state.open && (
+            <Border>
+              <Header>
+
+                <button type='button' onClick={() => {this.setState({today: new Date(year, month - 1, day)})}}>Previous Month</button>
+                  <div>
+                    {months[month]}
+                    {' '}
+                    {year}
+                  </div>
+                <button type='button' onClick={() => {this.setState({today: new Date(year, month + 1, day)})}}>Next Month</button>
+
+              </Header>
+              <Body>
+                {daysOfTheWeek.map((currentDay) => (
+                  <DayBody key={currentDay}>
+                    <strong>{currentDay}</strong>
+                  </DayBody>
+                ))}
+
+                {Array(lastDays[month] + (startDay - 1)).fill(null).map((_, index) => {
+                  const specificDay = index - (startDay - 2)
+                  return (
+                    <DayBody
+                      key={index}
+                      isToday={specificDay === todaysDate.getDate()}
+                      isSelected={specificDay === this.state.today.getDate()}
+                      onClick={() => this.handleNewDate(specificDay, month, year)}
+                      >
+                      {specificDay > 0 ? specificDay : ''}
+                    </DayBody>
+                  );
+                })}
+              </Body>
+            </Border>
+          )}
         </div>
-      </Header>
-
-      <div className="calendarDropDown">
-        {open && (
-          <Border>
-            <Header>
-              <button type="button" onClick={() => setDate(new Date(year, month - 1, day))}> Previous Month </button>
-              <div>
-                {months[month]}
-                {' ' + year}
-              </div>
-              <button type="button" onClick={() => setDate(new Date(year, month + 1, day))}> Next Month </button>
-              {console.log(year, month, day)}
-            </Header>
-            <Body>
-              {daysOfTheWeek.map((currentDay) => (
-                <Day key={currentDay}>
-                  <strong>{currentDay}</strong>
-                </Day>
-              ))}
-
-              {Array(lastDays[month] + (startDay - 1)).fill(null).map((_, index) => {
-                const currentDay = index - (startDay - 2);
-                // { console.log(lastDays[month], currentDay, index, startDay); }
-                return (
-                  <Day
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={index}
-                    isToday={currentDay === today.getDate()}
-                    isSelected={currentDay === day}
-                    onClick={() => setDate(new Date(year, month, currentDay))}
-                  >
-                    {currentDay > 0 ? currentDay : ''}
-                  </Day>
-                );
-              })}
-            </Body>
-          </Border>
-        )}
-      </div>
-    </Frame>
-
-  );
+      </Frame>
+    );
+  }
 }
 
 export default Calendar;

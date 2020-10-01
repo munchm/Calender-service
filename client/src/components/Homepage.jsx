@@ -31,10 +31,10 @@ function Homepage() {
           <h2>Make a Reservation</h2>
         </Title>
         <Calendar />
-        <SecondRow>
+        {/* <SecondRow>
           <ReservationTimes />
           <People />
-        </SecondRow>
+        </SecondRow> */}
       </Border>
     </div>
   );
