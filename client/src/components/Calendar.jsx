@@ -53,8 +53,7 @@ const HeaderIcon = styled.div`
 const LeftIcon = styled.div`
   width: 10px;
   height: 1px;
-  color: lightgrey;
-  border: 0px solid;
+  opacity: 50px;
   transform: rotate(90deg) translate(5px, -20px) scale(1.5, 1.5);
 `;
 

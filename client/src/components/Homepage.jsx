@@ -33,7 +33,7 @@ const InlineRow = styled.div`
   display: inline-flex;
   flex-direction: row;
   padding: 10px 0px;
-  gap: 25px
+  gap: 22px
 `;
 
 const Row = styled.div`

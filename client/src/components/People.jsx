@@ -22,8 +22,10 @@ const Header = styled.div`
   padding: 19px 20px;
 `;
 
-const Icon = styled.div`
-  justify-content: right;
+const HeaderIcon = styled.div`
+  width: 1px;
+  height: 1px;
+  transform: translate(143px, -20px) scale(1.5, 1.5);
 `;
 
 const Option = styled.div`
@@ -72,23 +74,25 @@ class People extends React.Component {
     console.log(this.state.choice)
     return (
       <Frame>
-        <div
-          tabIndex={0}
+        <Header
           role="button"
           onClick={this.handleOpen}
         >
-          <Header>
-            {
-              this.state.choice === null ?
-              (this.state.number === 1 ?
-              <strong>{this.state.number} person</strong> :
-              <strong>{this.state.number} people</strong>) :
-              this.state.number === 1 ?
-              <strong>{this.state.choice} person</strong> :
-              <strong>{this.state.choice} people</strong>
-            }
-          </Header>
-        </div>
+          {
+            this.state.choice === null ?
+            (this.state.number === 1 ?
+            <strong>{this.state.number} person</strong> :
+            <strong>{this.state.number} people</strong>) :
+            this.state.number === 1 ?
+            <strong>{this.state.choice} person</strong> :
+            <strong>{this.state.choice} people</strong>
+          }
+          <HeaderIcon>
+            <svg>
+              <path d={icons.arrowIcon} />
+            </svg>
+          </HeaderIcon>
+        </Header>
         <div
           onClick={this.handleOpen}
           >
