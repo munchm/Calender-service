@@ -33,16 +33,39 @@ const Header = styled.div`
   padding: 20px 20px;
 `;
 
+const DropDownMonth = styled.div`
+  transform: translate(15px, 0px);
+`;
+
 const Body = styled.div`
   display: flex;
   flex-wrap: wrap;
   border-radius: 50%;
+  `;
+
+const HeaderIcon = styled.div`
+  width: 1px;
+  height: 1px;
+  border: 0px solid;
+  transform: translate(-10px, 0px) scale(1.5, 1.5);
+`
+
+const LeftIcon = styled.div`
+  width: 10px;
+  height: 1px;
+  color: lightgrey;
+  border: 0px solid;
+  transform: rotate(90deg) translate(5px, -20px) scale(1.5, 1.5);
 `;
 
-const Icon = styled.div`
-  display: flex;
-  justify-content: right;
-`
+const RightIcon = styled.div`
+  width: 10px;
+  height: 1px;
+  padding: 20px 20px 0px 10px;
+  border: 0px solid;
+  transform: rotate(-90deg) translate(5px, -20px) scale(1.5, 1.5);
+`;
+
 const DayBody = styled.div`
   width: 14%;
   height: 50px;
@@ -128,32 +151,45 @@ class Calendar extends Component {
     console.log(todaysDate)
 
     return (
-      <Frame
-        tabIndex={0}
-        role="button"
-        onKeyPress={this.handleToggle}
-        onClick={this.handleToggle}
-      >
-          <Header>
-              {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day}
-              {/* <svg>
+      <Frame>
+          <Header
+            role="button"
+            onKeyPress={this.handleToggle}
+            onClick={this.handleToggle}
+          >
+            {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day}
+            <HeaderIcon>
+              <svg>
                 <path d={icons.arrowIcon} />
-              </svg> */}
+              </svg>
+            </HeaderIcon>
           </Header>
         <div className="calendarDropDown">
 
           {this.state.open && (
             <Border>
-
               <Header>
 
-                <button type='button' onClick={() => {this.setState({today: new Date(year, month - 1, day)})}}>Previous Month</button>
-                  <div>
-                    {months[month]}
-                    {' '}
-                    {year}
-                  </div>
-                <button type='button' onClick={() => {this.setState({today: new Date(year, month + 1, day)})}}>Next Month</button>
+                <div
+                  onClick={() => {this.setState({today: new Date(year, month - 1, day)})}}> <LeftIcon>
+                    <svg>
+                      <path d={icons.arrowIcon} />
+                    </svg>
+                  </LeftIcon>
+                </div>
+                <DropDownMonth>
+                  {months[month]}
+                  {' '}
+                  {year}
+                </DropDownMonth>
+                <div
+                  onClick={() => {this.setState({today: new Date(year, month + 1, day)})}}>
+                  <RightIcon>
+                    <svg>
+                      <path d={icons.arrowIcon} />
+                    </svg>
+                  </RightIcon>
+                </div>
 
               </Header>
               <Body>
