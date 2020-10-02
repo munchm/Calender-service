@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from 'React';
 import styled, { css } from 'styled-components';
 
+const Frame = styled.div`
+  width: 200px;
+`;
+
 const Border = styled.div`
-  width: 225px;
-  padding: 20px 45px 20px 10px;
-  border: 2px solid black;
-  align-contents: center;
+  font-size: 18px;
+  position: absolute;
+  width: 195px;
+  list-style-type: disc;
+  background-color: white;
+  box-shadow: 10px 10px 10px 10px #eee;
 `;
 
 const Header = styled.div`
+  padding: 20px 20px;
+  border: .5px solid rgb(118, 118, 118);
+  font-family: 'Arial';
   font-size: 18px;
-  font-weight: bold;
-  padding: 20px 10px 5px 10px;
-  display: flex;
+  border-radius: 5px;
 `;
 
 const Option = styled.div`
+  font-family: 'Arial';
   font-size: 18px;
-  font-weight: bold;
-  padding: 10px 10px 5px 10px;
+  padding: 20px 10px 10px 10px;
   display: flex;
   cursor: pointer;
   &:hover {
@@ -26,8 +33,8 @@ const Option = styled.div`
   }
 
   ${(props) => props.selected && css`
-    background-color: #00FFFF;
-    color: white;
+    background-color: rgba(10,179,201,.1);
+    color: #00838f;
   `}
 `;
 
@@ -36,7 +43,7 @@ class ReservationTime extends React.Component {
     super();
     this.state = {
       time: 9,
-      choice: '',
+      choice: null,
       open: false,
     };
     this.handleChoice = this.handleChoice.bind(this);
@@ -58,40 +65,51 @@ class ReservationTime extends React.Component {
   render() {
     const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
     return (
-      <Border>
-        <div>
-
-          <Header
-            tabIndex={0}
-            role="button"
-            onClick={this.handleOpen}
-          >
-            <strong value={this.state.time}> {this.state.time} PM</strong>
+      <Frame
+        onClick={this.handleOpen}
+      >
+        <div
+          tabIndex={0}
+          role="button"
+          onClick={this.handleOpen}
+        >
+          <Header>
+            {
+            this.state.choice === null ?
+            (this.state.time <= 12 ?
+            <strong>{this.state.time}:00 AM</strong> :
+            <strong>{this.state.time - 12}:00 PM</strong>) :
+            this.state.choice <= 12 ?
+            <strong>{this.state.choice}:00 AM</strong> :
+            <strong>{this.state.choice - 12}:00 PM</strong>
+            }
           </Header>
-          <div>
-            {this.state.open && (
-              <div>
+        </div>
+          {this.state.open && (
+            <div
+              onClick={this.handleOpen}
+            >
 
+              <Border>
                 {times.map((time, index) => {
                   const chosen = time
                   return (
-                    <Option
-                      key={index}
-                      selected={chosen === this.state.choice}
-                      onClick={() => this.handleChoice(chosen)}
-                    >
-                      {chosen <= 12 ?
-                      <strong>{time}:00 AM</strong> :
-                      <strong>{time - 12}:00 PM</strong>
-                      }
-                    </Option>
+                      <Option
+                        key={index}
+                        selected={chosen === this.state.choice}
+                        onClick={() => this.handleChoice(chosen)}
+                      >
+                        {chosen <= 12 ?
+                        <strong>{time}:00 AM</strong> :
+                        <strong>{time - 12}:00 PM</strong>
+                        }
+                      </Option>
                   )
                 })}
-              </div>
-            )}
-          </div>
-        </div>
-      </Border>
+              </Border>
+            </div>
+          )}
+      </Frame>
     );
   }
 }

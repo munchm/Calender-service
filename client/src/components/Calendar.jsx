@@ -6,53 +6,67 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
+import icons from '../icons.jsx';
 
 const Frame = styled.div`
-  width: 600px;
-  border: 2px solid black;
-  padding: 10px 10px 20px 10px;
+  width: 420px;
+  border: .5px solid rgb(118, 118, 118);
   align-contents: center;
+  position: relative;
+  border-radius: 5px;
 `;
 
 const Border = styled.div`
-  width: 600px;
-  border: 1px solid lightgrey;
+  width: 400px;
+  box-shadow: 10px 10px 10px 10px #eee;
+  position: absolute;
+  background-color: white;
 `;
 
 const Header = styled.div`
+  display: flex;
+  font-family: 'Arial';
+  flex-wrap: wrap;
   font-size: 18px;
   font-weight: bold;
-  padding: 10px 10px 5px 10px;
-  display: flex;
   justify-content: space-between;
+  padding: 20px 20px;
 `;
 
 const Body = styled.div`
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  border-radius: 50%;
 `;
 
-const Button = styled.div`
-  cursor: pointer;
+const Icon = styled.div`
+  display: flex;
+  justify-content: right;
 `
 const DayBody = styled.div`
-  width: 14.2%;
-  height: 40px;
+  width: 14%;
+  height: 50px;
+  border-radius: 50%;
+  appearance: textfield;
   display: flex;
   align-items: center;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
   justify-content: center;
   cursor: pointer;
+  font-family: 'Arial';
   &:hover {
     background: lightgrey;
   }
 
   ${(props) => props.isToday && css`
-    border: 1px solid #eee;
-    background-color: #eee`}
+    border: 2px solid #eee;
+    background-color: #eee;`}
 
   ${(props) => props.isSelected && css`
-    background-color: #ff0000`}
+    background-color: #ff0000;
+    color: white;`}
 `;
 
 
@@ -101,7 +115,8 @@ class Calendar extends Component {
     }
 
     const lastDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const daysOfTheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const daysOfTheWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const shortDaysOfTheWeek = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     const todaysDate = new Date();
@@ -113,21 +128,23 @@ class Calendar extends Component {
     console.log(todaysDate)
 
     return (
-      <Frame>
-        <Header
-          tabIndex={0}
-          role="button"
-          onKeyPress={this.handleToggle}
-          onClick={this.handleToggle}
-        >
-          <div>
-            <p>{months[month] + ' ' + day}</p>
-          </div>
-        </Header>
+      <Frame
+        tabIndex={0}
+        role="button"
+        onKeyPress={this.handleToggle}
+        onClick={this.handleToggle}
+      >
+          <Header>
+              {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day}
+              {/* <svg>
+                <path d={icons.arrowIcon} />
+              </svg> */}
+          </Header>
         <div className="calendarDropDown">
 
           {this.state.open && (
             <Border>
+
               <Header>
 
                 <button type='button' onClick={() => {this.setState({today: new Date(year, month - 1, day)})}}>Previous Month</button>
@@ -140,7 +157,7 @@ class Calendar extends Component {
 
               </Header>
               <Body>
-                {daysOfTheWeek.map((currentDay) => (
+                {shortDaysOfTheWeek.map((currentDay) => (
                   <DayBody key={currentDay}>
                     <strong>{currentDay}</strong>
                   </DayBody>
@@ -153,7 +170,11 @@ class Calendar extends Component {
                     <DayBody
                       key={index}
                       isToday={specificDay === todaysDate.getDate()}
-                      isSelected={specificDay === this.state.today.getDate()}
+                      isSelected={
+                        todaysDate.getDate() === this.state.today.getDate() ?
+                        specificDay === '' :
+                        specificDay === this.state.today.getDate()
+                      }
                       onClick={() => this.handleNewDate(specificDay, month, year)}
                       >
                       {specificDay > 0 ? specificDay : ''}

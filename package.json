@@ -13,7 +13,8 @@
     "build-d": "wepback --mode=development",
     "build-p": "webpack --mode=production",
     "seed": "node database/seed.js",
-    "test": "jest"
+    "test": "jest",
+    "jest-coverage": "jest --coverage --colors"
   },
   "dependencies": {
     "axios": "^0.20.0",

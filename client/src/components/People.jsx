@@ -1,34 +1,46 @@
 import React, { useState, useEffect } from 'React';
 import styled, { css } from 'styled-components';
+import icons from '../icons.jsx';
 
-const PeopleBorder = styled.div`
-  width: 240px;
-  padding: 20px 50px 20px 10px;
-  border: 2px solid black;
-  align-contents: center;
+const Frame = styled.div`
+  width: 200px;
+`;
+
+const Border = styled.div`
+  box-shadow: 10px 10px 10px 10px #eee;
+  position: absolute;
+  width: 195px;
+  list-style-type: disc;
+  background-color: white;
 `;
 
 const Header = styled.div`
+  font-family: 'Arial';
   font-size: 18px;
-  font-weight: bold;
-  padding: 20px 10px 5px 10px;
-  display: flex;
+  border-radius: 5px;
+  border: .5px solid rgb(118, 118, 118);
+  padding: 19px 20px;
+`;
+
+const Icon = styled.div`
+  justify-content: right;
 `;
 
 const Option = styled.div`
+  position: relative;
+  font: Arial;
   font-size: 18px;
-  font-weight: bold;
-  padding: 10px 10px 5px 10px;
-  display: flex;
+  padding: 20px 10px 20px 20px;
   cursor: pointer;
   &:hover {
     background: lightgrey;
   }
 
   ${(props) => props.selected && css`
-    background-color: #00FFFF;
-    color: white;
+    background-color: rgba(10,179,201,.1);
+    color: #00838f;
   `}
+
 `;
 
 class People extends React.Component {
@@ -37,7 +49,7 @@ class People extends React.Component {
     this.state = {
       number: 2,
       open: false,
-      choice: ''
+      choice: null,
     };
     this.handleChoice = this.handleChoice.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
@@ -57,42 +69,50 @@ class People extends React.Component {
 
   render() {
     const selection = [1, 2, 3, 4, 5, 6];
-    console.log(this.state)
+    console.log(this.state.choice)
     return (
-      <PeopleBorder>
-        <div>
-
-          <Header
-            tabIndex={0}
-            role="button"
-            onClick={this.handleOpen}
-          >
-            <strong value={this.state.number}> {this.state.number} People</strong>
+      <Frame>
+        <div
+          tabIndex={0}
+          role="button"
+          onClick={this.handleOpen}
+        >
+          <Header>
+            {
+              this.state.choice === null ?
+              (this.state.number === 1 ?
+              <strong>{this.state.number} person</strong> :
+              <strong>{this.state.number} people</strong>) :
+              this.state.number === 1 ?
+              <strong>{this.state.choice} person</strong> :
+              <strong>{this.state.choice} people</strong>
+            }
           </Header>
-          <div>
-            {this.state.open && (
-              <div>
-
-                {selection.map((num, index) => {
-                  const chosen = num
-                  return (
-                    <Option
-                      key={index}
-                      selected={chosen === this.state.choice}
-                      onClick={() => this.handleChoice(chosen)}
-                    >
-                      {num === 1 ?
-                      <strong>{num} Person</strong> :
-                      <strong>{num} People</strong>
-                      }
-                    </Option>
-                  )
-                })}
-              </div>
-            )}
-          </div>
         </div>
-      </PeopleBorder>
+        <div
+          onClick={this.handleOpen}
+          >
+          {this.state.open && (
+            <Border>
+              {selection.map((num, index) => {
+                const chosen = num
+                return (
+                  <Option
+                    key={index}
+                    selected={chosen === this.state.choice}
+                    onClick={() => this.handleChoice(chosen)}
+                  >
+                    {num === 1 ?
+                    <strong>{num} person</strong> :
+                    <strong>{num} people</strong>
+                    }
+                  </Option>
+                )
+              })}
+            </Border>
+          )}
+        </div>
+      </Frame>
     );
   }
 }

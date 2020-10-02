@@ -3,27 +3,42 @@ import styled, { css } from 'styled-components';
 import Calendar from './Calendar.jsx';
 import ReservationTimes from './ReservationTimes.jsx';
 import People from './People.jsx';
+import FindTable from './FindTable.jsx';
 
 const Border = styled.div`
-  width: 700px;
-  height: 700px;
-  border: 2px solid black;
+  width: 425px;
   box-shadow: 10px 10px 10px #eee;
-  padding: 20px 10px 20px 80px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid;
+  padding: 24px 24px 24px 24px;
 `;
 
-const Title = styled.div`
+const Header = styled.div`
   display: flex;
+  margin-flex-start: 1.33em;
   justify-content: left;
   align-content: center;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 700;
+  color: black;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  vertical-align: baseline;
+`;
+
+const InlineRow = styled.div`
+  align-content: center;
+  display: inline-flex;
+  flex-direction: row;
+  padding: 10px 0px;
+  gap: 25px
 `;
 
 const Row = styled.div`
-  width: 550px;
   display: flex;
-  flex-direction: row;
-  padding: 20px 0px 0px 0px;
-  gap: 35px
+  padding: 10px 0px;
 `;
 
 const Column = styled.div`
@@ -32,22 +47,21 @@ const Column = styled.div`
 
 function Homepage() {
   return (
-    <div>
-      <Border>
-        <Title>
-          <h2>Make a Reservation</h2>
-        </Title>
+    <Border>
+      <Header>
+        <h2>Make a Reservation</h2>
+      </Header>
+      <Row>
         <Calendar />
-        <Row>
-          <Column size={1}>
-            <ReservationTimes />
-          </Column>
-          <Column size={1}>
-            <People />
-          </Column>
-        </Row>
-      </Border>
-    </div>
+      </Row>
+      <InlineRow>
+          <ReservationTimes />
+          <People />
+      </InlineRow>
+      <Row>
+        <FindTable/>
+      </Row>
+    </Border>
   );
 }
 
