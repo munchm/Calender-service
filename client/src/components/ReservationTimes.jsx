@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'React';
 import styled, { css } from 'styled-components';
+import icons from '../icons.jsx';
 
 const Frame = styled.div`
   width: 200px;
@@ -8,24 +9,51 @@ const Frame = styled.div`
 const Border = styled.div`
   font-size: 18px;
   position: absolute;
-  width: 195px;
+  width: 180px;
+  height: 400px;
+  overflow-y: scroll;
   list-style-type: disc;
   background-color: white;
+  padding: 5px 5px;
   box-shadow: 10px 10px 10px 10px #eee;
 `;
 
 const Header = styled.div`
-  padding: 20px 20px;
+  padding: 0px 20px;
   border: .5px solid rgb(118, 118, 118);
   font-family: 'Arial';
   font-size: 18px;
   border-radius: 5px;
 `;
 
+const Arrow = styled.div`
+
+`;
+
+const ArrowBorder = styled.div`
+  box-shadow: 0px 0px 20px 0px #eee;
+  vertical-align: center;
+  height: 30px;
+  width: 200px;
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  transform: rotate(-180deg) scale(.4, .4) translate(0px, 0px);
+`;
+
+const HeaderIcon = styled.div`
+  position: absolute;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  transform: translate(170px, -35px) scale(1.5, 1.5);
+`
+
 const Option = styled.div`
   font-family: 'Arial';
-  font-size: 18px;
-  padding: 20px 10px 10px 10px;
+  font-size: 16px;
+  padding: 5px 15px;
+  height: 50px;
   display: flex;
   cursor: pointer;
   &:hover {
@@ -77,38 +105,42 @@ class ReservationTime extends React.Component {
             {
             this.state.choice === null ?
             (this.state.time <= 12 ?
-            <strong>{this.state.time}:00 AM</strong> :
-            <strong>{this.state.time - 12}:00 PM</strong>) :
+            <p>{this.state.time}:00 AM</p> :
+            <p>{this.state.time - 12}:00 PM</p>) :
             this.state.choice <= 12 ?
-            <strong>{this.state.choice}:00 AM</strong> :
-            <strong>{this.state.choice - 12}:00 PM</strong>
+            <p>{this.state.choice}:00 AM</p> :
+            <p>{this.state.choice - 12}:00 PM</p>
             }
           </Header>
+          <HeaderIcon>
+            <svg viewBox="0 0 20 20">
+              <path d={icons.arrowIcon} />
+            </svg>
+          </HeaderIcon>
         </div>
+        <Arrow>
           {this.state.open && (
-            <div
+            <Border
               onClick={this.handleOpen}
             >
-
-              <Border>
-                {times.map((time, index) => {
-                  const chosen = time
-                  return (
-                      <Option
-                        key={index}
-                        selected={chosen === this.state.choice}
-                        onClick={() => this.handleChoice(chosen)}
-                      >
-                        {chosen <= 12 ?
-                        <strong>{time}:00 AM</strong> :
-                        <strong>{time - 12}:00 PM</strong>
-                        }
-                      </Option>
-                  )
-                })}
-              </Border>
-            </div>
+              {times.map((time, index) => {
+                const chosen = time
+                return (
+                  <Option
+                    key={index}
+                    selected={chosen === this.state.choice}
+                    onClick={() => this.handleChoice(chosen)}
+                  >
+                    {chosen <= 12 ?
+                    <p>{time}:00 AM</p> :
+                    <p>{time - 12}:00 PM</p>
+                    }
+                  </Option>
+                )
+              })}
+            </Border>
           )}
+        </Arrow>
       </Frame>
     );
   }

@@ -18,21 +18,31 @@ const Header = styled.div`
   font-family: 'Arial';
   font-size: 18px;
   border-radius: 5px;
+  padding: 0px 60px;
   border: .5px solid rgb(118, 118, 118);
-  padding: 19px 20px;
 `;
 
-const HeaderIcon = styled.div`
-  width: 1px;
-  height: 1px;
-  transform: translate(143px, -20px) scale(1.5, 1.5);
+const ArrowIcon = styled.div`
+  position: absolute;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  transform: translate(110px, -35px) scale(1.5, 1.5);
+`;
+
+const PeopleIcon = styled.div`
+  position: absolute;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  transform: translate(-45px, 18px) scale(1.5, 1.5);
 `;
 
 const Option = styled.div`
   position: relative;
   font: Arial;
   font-size: 18px;
-  padding: 20px 10px 20px 20px;
+  padding: 3px 20px;
   cursor: pointer;
   &:hover {
     background: lightgrey;
@@ -78,20 +88,28 @@ class People extends React.Component {
           role="button"
           onClick={this.handleOpen}
         >
+          <PeopleIcon>
+            <svg viewBox='0 0 20 20'>
+              <g color="grey" fill="currentcolor">
+                <path d={icons.maleIcon} />
+              </g>
+              <path d={icons.femaleIcon} />
+            </svg>
+          </PeopleIcon>
           {
             this.state.choice === null ?
             (this.state.number === 1 ?
-            <strong>{this.state.number} person</strong> :
-            <strong>{this.state.number} people</strong>) :
+            <p>{this.state.number} person</p> :
+            <p>{this.state.number} people</p>) :
             this.state.number === 1 ?
-            <strong>{this.state.choice} person</strong> :
-            <strong>{this.state.choice} people</strong>
+            <p>{this.state.choice} person</p> :
+            <p>{this.state.choice} people</p>
           }
-          <HeaderIcon>
-            <svg>
+          <ArrowIcon>
+            <svg viewBox='0 0 20 20'>
               <path d={icons.arrowIcon} />
             </svg>
-          </HeaderIcon>
+          </ArrowIcon>
         </Header>
         <div
           onClick={this.handleOpen}
@@ -107,8 +125,8 @@ class People extends React.Component {
                     onClick={() => this.handleChoice(chosen)}
                   >
                     {num === 1 ?
-                    <strong>{num} person</strong> :
-                    <strong>{num} people</strong>
+                    <p>{num} person</p> :
+                    <p>{num} people</p>
                     }
                   </Option>
                 )

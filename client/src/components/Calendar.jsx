@@ -20,21 +20,30 @@ const Border = styled.div`
   width: 400px;
   box-shadow: 10px 10px 10px 10px #eee;
   position: absolute;
+  z-index: 2;
   background-color: white;
 `;
 
 const Header = styled.div`
   display: flex;
   font-family: 'Arial';
-  flex-wrap: wrap;
   font-size: 18px;
-  font-weight: bold;
+  justify-content: space-between;
+  padding: 20px 20px;
+`;
+
+const DropDownHeader = styled.div`
+  display: flex;
+  font-family: 'Arial';
+  vertical-align: center;
+  justify-content: center;
+  font-size: 18px;
   justify-content: space-between;
   padding: 20px 20px;
 `;
 
 const DropDownMonth = styled.div`
-  transform: translate(15px, 0px);
+  transform: translate(10px, 0px) scale(1.5 1.5);
 `;
 
 const Body = styled.div`
@@ -44,25 +53,23 @@ const Body = styled.div`
   `;
 
 const HeaderIcon = styled.div`
-  width: 1px;
-  height: 1px;
-  border: 0px solid;
-  transform: translate(-10px, 0px) scale(1.5, 1.5);
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transform: translate(376px, 10px) scale(1.5, 1.5);
 `
 
 const LeftIcon = styled.div`
-  width: 10px;
-  height: 1px;
+  width: 30px;
+  height: 30px;
   opacity: 50px;
-  transform: rotate(90deg) translate(5px, -20px) scale(1.5, 1.5);
+  transform: rotate(90deg) translate(5px, 15px) scale(1.5, 1.5);
 `;
 
 const RightIcon = styled.div`
-  width: 10px;
-  height: 1px;
-  padding: 20px 20px 0px 10px;
-  border: 0px solid;
-  transform: rotate(-90deg) translate(5px, -20px) scale(1.5, 1.5);
+  width: 30px;
+  height: 30px;
+  transform: rotate(-90deg) translate(15px, 10px) scale(1.5, 1.5);
 `;
 
 const DayBody = styled.div`
@@ -113,18 +120,6 @@ class Calendar extends Component {
     })
   }
 
-  // handlePreviousMonth() {
-  //   this.setState({
-  //     date: new Date(this.state.year, this.state.month -  1, this.state.days)
-  //   })
-  // }
-
-  // handleNextMonth() {
-  //   this.setState({
-  //     date: new Date(this.state.year, this.state.month + 1, this.state.days)
-  //   })
-  // }
-
   handleNewDate(currentDay, currentMonth, currentYear) {
     this.setState({
       today: new Date(currentYear, currentMonth, currentDay)
@@ -152,13 +147,12 @@ class Calendar extends Component {
     return (
       <Frame>
           <Header
-            role="button"
             onKeyPress={this.handleToggle}
             onClick={this.handleToggle}
           >
             {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day}
             <HeaderIcon>
-              <svg>
+              <svg viewBox='0 0 30 30'>
                 <path d={icons.arrowIcon} />
               </svg>
             </HeaderIcon>
@@ -167,11 +161,11 @@ class Calendar extends Component {
 
           {this.state.open && (
             <Border>
-              <Header>
+              <DropDownHeader>
 
                 <div
                   onClick={() => {this.setState({today: new Date(year, month - 1, day)})}}> <LeftIcon>
-                    <svg>
+                    <svg viewBox='0 0 30 30'>
                       <path d={icons.arrowIcon} />
                     </svg>
                   </LeftIcon>
@@ -184,13 +178,13 @@ class Calendar extends Component {
                 <div
                   onClick={() => {this.setState({today: new Date(year, month + 1, day)})}}>
                   <RightIcon>
-                    <svg>
+                    <svg viewBox='0 0 30 30'>
                       <path d={icons.arrowIcon} />
                     </svg>
                   </RightIcon>
                 </div>
 
-              </Header>
+              </DropDownHeader>
               <Body>
                 {shortDaysOfTheWeek.map((currentDay) => (
                   <DayBody key={currentDay}>
