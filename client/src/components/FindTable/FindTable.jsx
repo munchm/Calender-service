@@ -8,6 +8,10 @@ const Frame = styled.div`
 `;
 
 const Modal = styled.div`
+  position: absolute;
+  margin: auto;
+  background-color: white;
+  transform: scale(1.5, 1.5) translate(100px, 0px)
 `;
 
 const Calendar = styled.div`
@@ -25,7 +29,6 @@ const Header = styled.div`
   justify-content: center;
   text-align: center;
   padding: 10px 0px 0px 0px;
-  position: relative;
   background-color: rgb(244, 0, 0, .9);
   border: 1px solid #f43939;
   color: white;
