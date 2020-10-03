@@ -6,30 +6,30 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import icons from '../icons.jsx';
+import icons from '../../icons.jsx';
 
 const Frame = styled.div`
   width: 420px;
+  height: 30px;
   border: .5px solid rgb(118, 118, 118);
-  align-contents: center;
-  position: relative;
   border-radius: 5px;
 `;
 
 const Border = styled.div`
-  width: 400px;
+  width: 300px;
   box-shadow: 10px 10px 10px 10px #eee;
   position: absolute;
+  transform: translate(70px, 33px);
   z-index: 2;
   background-color: white;
 `;
 
 const Header = styled.div`
-  display: flex;
+  position: absolute;
+  width: 200px;
+  transform: translate(40px, 7px);
   font-family: 'Arial';
-  font-size: 18px;
-  justify-content: space-between;
-  padding: 20px 20px;
+  font-size: 16px;
   cursor: pointer;
 `;
 
@@ -40,7 +40,7 @@ const DropDownHeader = styled.div`
   justify-content: center;
   font-size: 18px;
   justify-content: space-between;
-  padding: 20px 20px;
+  padding: 20px 20px 20px 50px;
 `;
 
 const DropDownMonth = styled.div`
@@ -57,7 +57,7 @@ const HeaderIcon = styled.div`
   position: absolute;
   width: 30px;
   height: 30px;
-  transform: translate(376px, 8px) scale(1.5, 1.5);
+  transform: translate(350px, -15px) scale(1.5, 1.5);
 `
 
 const LeftIcon = styled.div`
@@ -103,15 +103,18 @@ const DayBody = styled.div`
 
 
 
-class Calendar extends Component {
+class FindTableCalendar extends Component {
   constructor() {
     super();
     this.state = {
       today: new Date(),
       selectedDate: '',
-      open: false
+      open: false,
+      time: '',
     }
     this.handleToggle = this.handleToggle.bind(this);
+    // this.handleNextMonth = this.handleNextMonth.bind(this);
+    // this.handlePreviousMonth = this.handlePreviousMonth.bind(this);
     this.handleNewDate = this.handleNewDate.bind(this);
   }
 
@@ -124,6 +127,12 @@ class Calendar extends Component {
   handleNewDate(currentDay, currentMonth, currentYear) {
     this.setState({
       today: new Date(currentYear, currentMonth, currentDay)
+    })
+  }
+
+  handleReservationTime(time) {
+    this.setState({
+      time: time
     })
   }
 
@@ -151,7 +160,9 @@ class Calendar extends Component {
             onKeyPress={this.handleToggle}
             onClick={this.handleToggle}
           >
-            {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day}
+            <span>
+              {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day + ', ' + year}
+            </span>
             <HeaderIcon>
               <svg viewBox='0 0 30 30'>
                 <path d={icons.arrowIcon} />
@@ -165,22 +176,27 @@ class Calendar extends Component {
               <DropDownHeader>
 
                 <div
-                  onClick={() => {this.setState({today: new Date(year, month - 1, day)})}}> <LeftIcon>
+                  onClick={() => {this.setState({today: new Date(year, month - 1, day)})}}>
+                  {/* <LeftIcon>
                     <svg viewBox='0 0 30 30'>
                       <path d={icons.arrowIcon} />
                     </svg>
-                  </LeftIcon>
+                  </LeftIcon> */}
                 </div>
                 <DropDownMonth>
+                  <strong>
                   {months[month]}
                   {' '}
                   {year}
+                  </strong>
                 </DropDownMonth>
                 <div
                   onClick={() => {this.setState({today: new Date(year, month + 1, day)})}}>
                   <RightIcon>
                     <svg viewBox='0 0 30 30'>
+                    <g color="#448ee4" fill="currentcolor">
                       <path d={icons.arrowIcon} />
+                    </g>
                     </svg>
                   </RightIcon>
                 </div>
@@ -208,6 +224,7 @@ class Calendar extends Component {
                       onClick={() => this.handleNewDate(specificDay, month, year)}
                       >
                       {specificDay > 0 ? specificDay : ''}
+
                     </DayBody>
                   );
                 })}
@@ -220,4 +237,4 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+export default FindTableCalendar;

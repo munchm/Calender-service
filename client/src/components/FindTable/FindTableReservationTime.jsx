@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'React';
 import styled, { css } from 'styled-components';
-import icons from '../icons.jsx';
+import icons from '../../icons.jsx';
 
 const Frame = styled.div`
   width: 200px;
 `;
 
 const Border = styled.div`
+`;
+
+const Modal = styled.div`
   font-size: 18px;
   position: absolute;
   width: 190px;
-  height: 400px;
+  height: 100px;
   overflow-y: scroll;
   list-style-type: disc;
   background-color: white;
@@ -19,10 +22,10 @@ const Border = styled.div`
 `;
 
 const Header = styled.div`
-  padding: 0px 20px;
+  padding: 5px 40px;
   border: .5px solid rgb(118, 118, 118);
   font-family: 'Arial';
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
 `;
@@ -42,13 +45,13 @@ const ArrowBorder = styled.div`
   transform: rotate(-180deg) scale(.4, .4) translate(0px, 0px);
 `;
 
-const HeaderIcon = styled.div`
+const ArrowIcon = styled.div`
   position: absolute;
   z-index: 1;
   width: 20px;
   height: 20px;
   cursor: pointer;
-  transform: translate(170px, -35px) scale(1.5, 1.5);
+  transform: translate(170px, -22px) scale(1.5, 1.5);
 `
 
 const Option = styled.div`
@@ -68,7 +71,7 @@ const Option = styled.div`
   `}
 `;
 
-class ReservationTime extends React.Component {
+class FindTableReservationTime extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -98,7 +101,7 @@ class ReservationTime extends React.Component {
       <Frame
         onClick={this.handleOpen}
       >
-        <div
+        <Border
           tabIndex={0}
           role="button"
           onClick={this.handleOpen}
@@ -107,22 +110,22 @@ class ReservationTime extends React.Component {
             {
             this.state.choice === null ?
             (this.state.time <= 12 ?
-            <p>{this.state.time}:00 AM</p> :
+            <span>{this.state.time}:00 AM</span> :
             <p>{this.state.time - 12}:00 PM</p>) :
             this.state.choice <= 12 ?
             <p>{this.state.choice}:00 AM</p> :
             <p>{this.state.choice - 12}:00 PM</p>
             }
           </Header>
-          <HeaderIcon>
+          <ArrowIcon>
             <svg viewBox="0 0 20 20">
               <path d={icons.arrowIcon} />
             </svg>
-          </HeaderIcon>
-        </div>
+          </ArrowIcon>
+        </Border>
         <Arrow>
           {this.state.open && (
-            <Border
+            <Modal
               onClick={this.handleOpen}
             >
               {times.map((time, index) => {
@@ -140,7 +143,7 @@ class ReservationTime extends React.Component {
                   </Option>
                 )
               })}
-            </Border>
+            </Modal>
           )}
         </Arrow>
       </Frame>
@@ -148,6 +151,6 @@ class ReservationTime extends React.Component {
   }
 }
 
-export default ReservationTime;
+export default FindTableReservationTime;
 
 

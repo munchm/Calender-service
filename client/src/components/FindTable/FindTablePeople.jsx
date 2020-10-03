@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'React';
 import styled, { css } from 'styled-components';
-import icons from '../icons.jsx';
+import icons from '../../icons.jsx';
 
 const Frame = styled.div`
   width: 200px;
@@ -16,9 +16,9 @@ const Border = styled.div`
 
 const Header = styled.div`
   font-family: 'Arial';
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 5px;
-  padding: 0px 60px;
+  padding: 5px 60px;
   border: .5px solid rgb(118, 118, 118);
   cursor: pointer;
 `;
@@ -28,7 +28,7 @@ const ArrowIcon = styled.div`
   z-index: 1;
   width: 20px;
   height: 20px;
-  transform: translate(110px, -35px) scale(1.5, 1.5);
+  transform: translate(104px, -16px) scale(1.5, 1.5);
 `;
 
 const PeopleIcon = styled.div`
@@ -36,7 +36,7 @@ const PeopleIcon = styled.div`
   z-index: 1;
   width: 20px;
   height: 20px;
-  transform: translate(-45px, 18px) scale(1.5, 1.5);
+  transform: translate(-45px, 2px) scale(1.5, 1.5);
 `;
 
 const Option = styled.div`
@@ -56,7 +56,7 @@ const Option = styled.div`
 
 `;
 
-class People extends React.Component {
+class FindTablePeople extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -100,11 +100,11 @@ class People extends React.Component {
           {
             this.state.choice === null ?
             (this.state.number === 1 ?
-            <p>{this.state.number} person</p> :
-            <p>{this.state.number} people</p>) :
+            <span>{this.state.number} person</span> :
+            <span>{this.state.number} people</span>) :
             this.state.number === 1 ?
-            <p>{this.state.choice} person</p> :
-            <p>{this.state.choice} people</p>
+            <span>{this.state.choice} person</span> :
+            <span>{this.state.choice} people</span>
           }
           <ArrowIcon>
             <svg viewBox='0 0 20 20'>
@@ -140,4 +140,4 @@ class People extends React.Component {
   }
 }
 
-export default People;
+export default FindTablePeople;

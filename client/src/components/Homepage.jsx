@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import Calendar from './Calendar.jsx';
 import ReservationTimes from './ReservationTimes.jsx';
 import People from './People.jsx';
-import FindTable from './FindTable.jsx';
+import FindTable from './FindTable/FindTable.jsx';
 
 const Border = styled.div`
   width: 425px;
@@ -37,8 +37,7 @@ const InlineRow = styled.div`
 `;
 
 const Row = styled.div`
-  display: flex;
-  padding: 10px 0px;
+  padding: 5px 0px;
 `;
 
 const Column = styled.div`
