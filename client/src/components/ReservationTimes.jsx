@@ -92,7 +92,14 @@ class ReservationTime extends React.Component {
     })
   }
 
+
   render() {
+
+    function range(start, end) {
+      return new Array(end - start + 1).fill().map((_, index) => start + index)
+    }
+    console.log(this.props.openingTime)
+    // console.log(range(this.props.openingTime, this.props.closingTime))
     const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
     return (
       <Frame

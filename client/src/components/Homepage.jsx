@@ -46,6 +46,21 @@ const Column = styled.div`
 `;
 
 const randNum = Math.floor(Math.random() * 100);
+// restaurantId
+// reservationDate
+// reservationMonth
+// reservationDay
+// reservationTimes
+// currentYear
+// available
+// people
+// firstName
+// lastName
+// email
+// phoneNumber
+// notes
+// openingTime
+// closingTime
 
 class Homepage extends React.Component {
   constructor() {
@@ -57,12 +72,11 @@ class Homepage extends React.Component {
     }
     this.getApiData = this.getApiData.bind(this);
     this.getApiRestaurant = this.getApiRestaurant.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
   componentDidMount() {
     this.getApiRestaurant(randNum);
   }
-
-
 
   getApiData() {
     axios.get('/api/calendar')
@@ -74,19 +88,30 @@ class Homepage extends React.Component {
       .catch()
   }
 
-  getApiRestaurant(id) {
-    axios.get(`/api/calendar/${id}`)
-      .then((res) =>
-        this.setState({
-          restaurantData: res.data
-        })
-      )
-      .catch()
+  async getApiRestaurant(id) {
+    const res = await axios.get(`/api/calendar/${id}`)
+    return await res.json()
   }
 
   render () {
-    console.log(this.state)
-    console.log(randNum)
+    // console.log(this.state.restaurantData.email)
+    const {
+      restaurantId,
+      reservationDate,
+      reservationMonth,
+      reservationDay,
+      reservationTimes,
+      currentYear,
+      available,
+      people,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      notes,
+      openingTime,
+      closingTime,
+    } = this.state.restaurantData;
     return (
       <Border>
         <Header>
@@ -96,7 +121,7 @@ class Homepage extends React.Component {
           <Calendar />
         </Row>
         <InlineRow>
-            <ReservationTimes />
+            <ReservationTimes openingTime={openingTime} closingTime={closingTime}/>
             <People />
         </InlineRow>
         <Row>
