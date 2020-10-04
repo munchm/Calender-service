@@ -5,7 +5,18 @@ const getData = (req, res) => {
     if (err) {
       res.status(400).send();
     } else {
-      console.log(data);
+      res.status(200).send(data);
+    }
+  });
+};
+
+const getRestaurant = (req, res) => {
+  const id = req.params.id;
+
+  modelHandler.getRestaurant(id, (err, data) => {
+    if (err) {
+      res.status(400).send();
+    } else {
       res.status(200).send(data);
     }
   });
@@ -13,4 +24,5 @@ const getData = (req, res) => {
 
 module.exports = {
   getData,
+  getRestaurant,
 };

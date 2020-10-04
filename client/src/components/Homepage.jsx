@@ -4,6 +4,7 @@ import Calendar from './Calendar.jsx';
 import ReservationTimes from './ReservationTimes.jsx';
 import People from './People.jsx';
 import FindTable from './FindTable/FindTable.jsx';
+import axios from 'axios';
 
 const Border = styled.div`
   width: 425px;
@@ -44,24 +45,66 @@ const Column = styled.div`
   flex: ${(props) => props.size}
 `;
 
-function Homepage() {
-  return (
-    <Border>
-      <Header>
-        <h2>Make a Reservation</h2>
-      </Header>
-      <Row>
-        <Calendar />
-      </Row>
-      <InlineRow>
-          <ReservationTimes />
-          <People />
-      </InlineRow>
-      <Row>
-        <FindTable/>
-      </Row>
-    </Border>
-  );
+const randNum = Math.floor(Math.random() * 100);
+
+class Homepage extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      data: '',
+      restaurantData: '',
+      time: '',
+    }
+    this.getApiData = this.getApiData.bind(this);
+    this.getApiRestaurant = this.getApiRestaurant.bind(this);
+  }
+  componentDidMount() {
+    this.getApiRestaurant(randNum);
+  }
+
+
+
+  getApiData() {
+    axios.get('/api/calendar')
+      .then((res) => {
+        this.setState({
+          data: res.data
+        })
+      })
+      .catch()
+  }
+
+  getApiRestaurant(id) {
+    axios.get(`/api/calendar/${id}`)
+      .then((res) =>
+        this.setState({
+          restaurantData: res.data
+        })
+      )
+      .catch()
+  }
+
+  render () {
+    console.log(this.state)
+    console.log(randNum)
+    return (
+      <Border>
+        <Header>
+          <h2>Make a Reservation</h2>
+        </Header>
+        <Row>
+          <Calendar />
+        </Row>
+        <InlineRow>
+            <ReservationTimes />
+            <People />
+        </InlineRow>
+        <Row>
+          <FindTable/>
+        </Row>
+      </Border>
+    );
+  }
 }
 
 export default Homepage;
