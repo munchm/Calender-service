@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "nodemon server/index.js",
+    "start-p": "nodemon proxy/server.js",
     "react-dev": "webpack -d --watch",
     "build-d": "wepback --mode=development",
     "build-p": "webpack --mode=production",
@@ -25,6 +26,7 @@
     "enzyme-adapter-react-16": "^1.15.5",
     "express": "^4.17.1",
     "faker": "^5.1.0",
+    "http-proxy": "^1.18.1",
     "jquery": "^2.2.4",
     "lodash": "^4.6.1",
     "mysql": "^2.18.1",
