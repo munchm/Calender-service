@@ -1,32 +1,23 @@
-DROP DATABASE IF EXISTS calendar
+DROP DATABASE IF EXISTS calendar;
 
-CREATE DATABASE calendar
+CREATE DATABASE calendar;
 
-USE calendar
-
--- CREATE TABLE year (
---   month varchar(10) not null,
---   day number not null,
---   people number not null,
---   reservation_id number not null AUTO_INCREMENT,
---   PRIMARY KEY (reservation_id)
--- );
-
--- CREATE TABLE reservations (
---   reservation_id number not null,
---   reservationTime varchar(10) not null,
---   available boolean not null,
---   PRIMARY KEY (reservation_id)
--- );
+USE calendar;
 
 CREATE TABLE reservation (
-  reservationDate  varchar(12) not null,
-  reservationTime  varchar(12) not null,
-  available        boolean not null,
-  people           number not null,
-  firstName        varchar(12) not null,
-  lastName         varchar(14) not null,
-  email            varchar(30) not null,
-  phoneNumber      varchar(12) not null,
-  notes            varchar(40) not null
+  restaurantId int not NULL PRIMARY KEY,
+  reservationDate varchar(200) not null,
+  reservationMonth varchar(40) not null,
+  reservationDay varchar(40) not null,
+  reservationTimes varchar(200) not null,
+  currentYear varchar(4) not null,
+  available boolean not null,
+  people varchar(200) not null,
+  firstName varchar(20) not null,
+  lastName varchar(20) not null,
+  email varchar(45) not null,
+  phoneNumber varchar(20) not null,
+  notes varchar(40) not null,
+  openingTime int not null,
+  closingTime int not null
 )

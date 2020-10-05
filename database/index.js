@@ -1,11 +1,11 @@
-var pass = require('../.env/config.js');
+const mysql = require('mysql');
+const pass = require('../.env/config.js');
 
-var mysql = require('mysql');
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: pass.key,
-  datebase: 'calendar'
+  database: 'calendar',
 });
 
 connection.connect((err) => {
@@ -14,14 +14,6 @@ connection.connect((err) => {
   } else {
     console.log('Successful connection to database :)');
   }
-});
-
-connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
-  if (err) {
-    throw err;
-  }
-
-  console.log('The solution is: ', rows[0].solution);
 });
 
 module.exports = connection;
