@@ -13,19 +13,20 @@ const Modal = styled.div`
   font-size: 18px;
   position: absolute;
   width: 190px;
-  height: 100px;
+  height: 300px;
   overflow-y: scroll;
   list-style-type: disc;
   background-color: white;
   padding: 5px 5px;
-  box-shadow: 10px 10px 10px 10px #eee;
+  box-shadow: 5px 5px 5px 5px #eee;
 `;
 
 const Header = styled.div`
   padding: 5px 40px;
-  border: .5px solid rgb(118, 118, 118);
+  border: 2px solid #eee;
   font-family: 'Arial';
   font-size: 16px;
+  background-color: white;
   border-radius: 5px;
   cursor: pointer;
 `;
@@ -56,13 +57,12 @@ const ArrowIcon = styled.div`
 
 const Option = styled.div`
   font-family: 'Arial';
-  font-size: 16px;
-  padding: 5px 15px;
-  height: 50px;
+  font-size: 15px;
+  padding: 20px 15px;
   display: flex;
   cursor: pointer;
   &:hover {
-    background: lightgrey;
+    background: #eee;
   }
 
   ${(props) => props.selected && css`
@@ -112,10 +112,10 @@ class FindTableReservationTime extends React.Component {
             this.state.choice === null ?
             (this.state.time <= 12 ?
             <span>{this.state.time}:00 AM</span> :
-            <p>{this.state.time - 12}:00 PM</p>) :
+            <span>{this.state.time - 12}:00 PM</span>) :
             this.state.choice <= 12 ?
-            <p>{this.state.choice}:00 AM</p> :
-            <p>{this.state.choice - 12}:00 PM</p>
+            <span>{this.state.choice}:00 AM</span> :
+            <span>{this.state.choice - 12}:00 PM</span>
             }
           </Header>
           <ArrowIcon>
@@ -138,8 +138,8 @@ class FindTableReservationTime extends React.Component {
                     onClick={() => this.handleChoice(chosen)}
                   >
                     {chosen <= 12 ?
-                    <p>{time}:00 AM</p> :
-                    <p>{time - 12}:00 PM</p>
+                    <span>{time}:00 AM</span> :
+                    <span>{time - 12}:00 PM</span>
                     }
                   </Option>
                 )

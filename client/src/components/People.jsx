@@ -10,6 +10,9 @@ const Border = styled.div`
   box-shadow: 10px 10px 10px 10px #eee;
   position: absolute;
   width: 195px;
+  height: 350px;
+  padding: 5px 5px;
+  overflow-y: scroll;
   list-style-type: disc;
   background-color: white;
 `;
@@ -17,9 +20,10 @@ const Border = styled.div`
 const Header = styled.div`
   font-family: 'Arial';
   font-size: 18px;
+  width: 86px;
   border-radius: 5px;
   padding: 0px 60px;
-  border: .5px solid rgb(118, 118, 118);
+  border: 2px solid #eee;
   cursor: pointer;
 `;
 
@@ -28,7 +32,7 @@ const ArrowIcon = styled.div`
   z-index: 1;
   width: 20px;
   height: 20px;
-  transform: translate(110px, -35px) scale(1.5, 1.5);
+  transform: translate(120px, -35px) scale(1.5, 1.5);
 `;
 
 const PeopleIcon = styled.div`
@@ -41,12 +45,12 @@ const PeopleIcon = styled.div`
 
 const Option = styled.div`
   position: relative;
-  font: Arial;
-  font-size: 18px;
-  padding: 3px 20px;
+  font-family: 'Arial';
+  font-size: 16px;
+  padding: 20px 20px;
   cursor: pointer;
   &:hover {
-    background: lightgrey;
+    background: #eee;
   }
 
   ${(props) => props.selected && css`
@@ -82,7 +86,7 @@ class People extends React.Component {
 
   render() {
     const selection = [1, 2, 3, 4, 5, 6];
-    console.log(this.state.choice)
+    // console.log(this.state.choice)
     return (
       <Frame>
         <Header
@@ -126,8 +130,8 @@ class People extends React.Component {
                     onClick={() => this.handleChoice(chosen)}
                   >
                     {num === 1 ?
-                    <p>{num} person</p> :
-                    <p>{num} people</p>
+                    <span>{num} person</span> :
+                    <span>{num} people</span>
                     }
                   </Option>
                 )

@@ -6,13 +6,24 @@ import People from './People.jsx';
 import FindTable from './FindTable/FindTable.jsx';
 import axios from 'axios';
 
+const HtmlPage = styled.body`
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 0;
+`;
+
 const Border = styled.div`
+  position: fixed;
   width: 425px;
-  box-shadow: 10px 10px 10px #eee;
+  left: 150px;
   background-color: #fff;
   border-radius: 4px;
-  border: 1px solid;
+  border: 2px solid #eee;
   padding: 24px 24px 24px 24px;
+  z-index: 5;
 `;
 
 const Header = styled.div`
@@ -34,12 +45,10 @@ const InlineRow = styled.div`
   display: inline-flex;
   flex-direction: row;
   padding: 10px 0px;
-  gap: 22px
+  gap: 12px
 `;
 
-const Row = styled.div`
-  padding: 5px 0px;
-`;
+
 
 const Column = styled.div`
   flex: ${(props) => props.size}
@@ -69,13 +78,15 @@ class Homepage extends React.Component {
       data: '',
       restaurantData: '',
       time: '',
+      modalToggle: false,
     }
     this.getApiData = this.getApiData.bind(this);
     this.getApiRestaurant = this.getApiRestaurant.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
-  componentDidMount() {
-    this.getApiRestaurant(randNum);
+
+  async componentDidMount() {
+    await this.getApiRestaurant(randNum)
   }
 
   getApiData() {
@@ -88,46 +99,46 @@ class Homepage extends React.Component {
       .catch()
   }
 
-  async getApiRestaurant(id) {
-    const res = await axios.get(`/api/calendar/${id}`)
-    return await res.json()
+  handleToggle() {
+    this.setState({
+      modalToggle: !this.state.modalToggle
+    })
+  }
+
+  getApiRestaurant(id) {
+    // const response = await axios.get(`/api/calendar/${id}`)
+    // this.setState({
+    //   restaurantData: response.data[0]
+    // })
+    axios.get(`/api/calendar/${id}`)
+      .then((response) => {
+        this.setState({
+          restaurantData: response.data[0]
+        })
+      })
+
   }
 
   render () {
-    // console.log(this.state.restaurantData.email)
-    const {
-      restaurantId,
-      reservationDate,
-      reservationMonth,
-      reservationDay,
-      reservationTimes,
-      currentYear,
-      available,
-      people,
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      notes,
-      openingTime,
-      closingTime,
-    } = this.state.restaurantData;
+    // console.log(this.state)
+    // const { openingTime, closingTime } = this.state.restaurantData;
+    // console.log(openingTime)
     return (
-      <Border>
-        <Header>
-          <h2>Make a Reservation</h2>
-        </Header>
-        <Row>
-          <Calendar />
-        </Row>
-        <InlineRow>
-            <ReservationTimes openingTime={openingTime} closingTime={closingTime}/>
-            <People />
-        </InlineRow>
-        <Row>
-          <FindTable/>
-        </Row>
-      </Border>
+      <HtmlPage>
+        <Border>
+          <Header>
+            <h2>Make a Reservation</h2>
+          </Header>
+            <Calendar />
+          <InlineRow>
+              <ReservationTimes openingTime={this.state.restaurantData.openingTime} closingTime={this.state.restaurantData.closingTime}/>
+              <People />
+          </InlineRow>
+          {/* <Row> */}
+            <FindTable handleToggle={this.handleToggle}/>
+          {/* </Row> */}
+        </Border>
+      </HtmlPage>
     );
   }
 }

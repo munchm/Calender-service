@@ -7,27 +7,40 @@ import FindTablePeople from './FindTablePeople.jsx';
 const Frame = styled.div`
 `;
 
+const BackdropModal = styled.div`
+  position: fixed;
+  background: lightgrey;
+  z-index: 5;
+  margin: 0;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+`;
+
 const Modal = styled.div`
-  position: absolute;
-  margin: auto;
-  background-color: white;
-  transform: scale(1.5, 1.5) translate(100px, 0px)
+  position: relative;
+  margin: 0;
+  left: 50px;
+  top: 50px;
+  z-index: 8;
 `;
 
 const Calendar = styled.div`
-  background-color: white;
+  display: flex;
+  justify-content: center;
   padding: 13px 0px;
 `;
 
 const Header = styled.div`
-  width: 420px;
   height: 40px;
+  width: 420px;
   border-radius: 4px;
   font-size: 25px;
   font-family: 'Helvetica Neue';
-  display: flex;
   justify-content: center;
   text-align: center;
+  display: flex;
   padding: 10px 0px 0px 0px;
   background-color: rgb(244, 0, 0, .9);
   border: 1px solid #f43939;
@@ -40,7 +53,7 @@ const SecondHeader = styled.div`
   padding: 10px 20px 10px 20px;
   font-size: 30px;
   font-weight: bold;
-  display: flex;
+  position: absolute;
   justify-content: center;
   background-color: blue;
   color: white;
@@ -48,7 +61,8 @@ const SecondHeader = styled.div`
 
 const InlineRow = styled.div`
   align-content: center;
-  display: inline-flex;
+  justify-content: center;
+  display: flex;
   flex-direction: row;
   gap: 22px
 `;
@@ -75,6 +89,7 @@ class FindTable extends React.Component {
   }
 
   render() {
+    console.log(this.props.handleToggle)
     return (
       <Frame>
         <Header
@@ -84,15 +99,17 @@ class FindTable extends React.Component {
           Find a Table
         </Header>
         {this.state.open && (
-          <Modal>
-            <Calendar>
-              <FindTableCalendar />
-            </Calendar>
-            <InlineRow>
-              <FindTableReservationTime />
-              <FindTablePeople />
-            </InlineRow>
-          </Modal>
+          <BackdropModal>
+            <Modal>
+              <Calendar>
+                <FindTableCalendar />
+              </Calendar>
+              <InlineRow>
+                <FindTableReservationTime />
+                <FindTablePeople />
+              </InlineRow>
+            </Modal>
+          </BackdropModal>
         )}
       </Frame>
     )

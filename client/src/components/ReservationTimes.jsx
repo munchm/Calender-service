@@ -10,7 +10,7 @@ const Border = styled.div`
   font-size: 18px;
   position: absolute;
   width: 190px;
-  height: 400px;
+  height: 350px;
   overflow-y: scroll;
   list-style-type: disc;
   background-color: white;
@@ -20,7 +20,7 @@ const Border = styled.div`
 
 const Header = styled.div`
   padding: 0px 20px;
-  border: .5px solid rgb(118, 118, 118);
+  border: 2px solid #eee;
   font-family: 'Arial';
   font-size: 18px;
   border-radius: 5px;
@@ -48,18 +48,17 @@ const HeaderIcon = styled.div`
   width: 20px;
   height: 20px;
   cursor: pointer;
-  transform: translate(170px, -35px) scale(1.5, 1.5);
+  transform: translate(167px, -37px) scale(1.5, 1.5);
 `
 
 const Option = styled.div`
   font-family: 'Arial';
   font-size: 16px;
-  padding: 5px 15px;
-  height: 50px;
+  padding: 4px 25px;
   display: flex;
   cursor: pointer;
   &:hover {
-    background: lightgrey;
+    background: #eee;
   }
 
   ${(props) => props.selected && css`
@@ -73,12 +72,22 @@ class ReservationTime extends React.Component {
     super();
     this.state = {
       time: 9,
+      timeRange: [],
       choice: null,
       open: false,
     };
     this.handleChoice = this.handleChoice.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
+    // this.range = this.range.bind(this);
   }
+
+  // async componentDidMount() {
+  //   const timeRange = await new Array(this.props.closingTime - this.props.openingTime + 1).fill().map((_, index) => this.props.openingTime + index);
+  //   this.setState({
+  //     timeRange: timeRange,
+  //     time: timeRange[0],
+  //   })
+  // }
 
   handleOpen() {
     this.setState({
@@ -92,15 +101,20 @@ class ReservationTime extends React.Component {
     })
   }
 
+  // async range() {
+  //   const timeRange = await new Array(this.props.closingTime - this.props.openingTime + 1).fill().map((_, index) => this.props.openingTime + index);
+  //   await console.log(timeRange)
+  //   return await timeRange;
+  //   this.setState({
+  //     time: timeRange
+  //   })
+  // }
 
   render() {
-
-    function range(start, end) {
-      return new Array(end - start + 1).fill().map((_, index) => start + index)
-    }
-    console.log(this.props.openingTime)
-    // console.log(range(this.props.openingTime, this.props.closingTime))
+    // console.log(this.props)
     const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+    // const timeRange = new Array(this.props.closingTime - this.props.openingTime + 1).fill().map((_, index) => this.props.openingTime + index);
+    // console.log(timeRange)
     return (
       <Frame
         onClick={this.handleOpen}

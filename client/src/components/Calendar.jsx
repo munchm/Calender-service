@@ -10,7 +10,7 @@ import icons from '../icons.jsx';
 
 const Frame = styled.div`
   width: 420px;
-  border: .5px solid rgb(118, 118, 118);
+  border: 2px solid #eee;
   align-contents: center;
   position: relative;
   border-radius: 5px;
@@ -38,7 +38,7 @@ const DropDownHeader = styled.div`
   font-family: 'Arial';
   vertical-align: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 25px;
   justify-content: space-between;
   padding: 20px 20px;
 `;
@@ -63,16 +63,15 @@ const HeaderIcon = styled.div`
 const LeftIcon = styled.div`
   width: 30px;
   height: 30px;
-  opacity: 50px;
   cursor: pointer;
-  transform: rotate(90deg) translate(5px, 15px) scale(1.5, 1.5);
+  transform: rotate(90deg) translate(15px, 10px) scale(2, 2);
 `;
 
 const RightIcon = styled.div`
   width: 30px;
   height: 30px;
   cursor: pointer;
-  transform: rotate(-90deg) translate(15px, 10px) scale(1.5, 1.5);
+  transform: rotate(270deg) translate(15px, 10px) scale(2, 2);
 `;
 
 const DayBody = styled.div`
@@ -83,7 +82,7 @@ const DayBody = styled.div`
   display: flex;
   align-items: center;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 20px;
   line-height: 20px;
   justify-content: center;
   cursor: pointer;
@@ -143,7 +142,7 @@ class Calendar extends Component {
     const month = date.getMonth();
     const year = date.getFullYear();
     const startDay = firstDayOfMonth(date)
-    console.log(todaysDate)
+    // console.log(todaysDate)
 
     return (
       <Frame>

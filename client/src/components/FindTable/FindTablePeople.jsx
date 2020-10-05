@@ -7,9 +7,12 @@ const Frame = styled.div`
 `;
 
 const Border = styled.div`
-  box-shadow: 10px 10px 10px 10px #eee;
+  box-shadow: 5px 5px 5px 5px #eee;
   position: absolute;
   width: 195px;
+  height: 300px;
+  padding: 5px 5px;
+  overflow-y: scroll;
   list-style-type: disc;
   background-color: white;
 `;
@@ -19,8 +22,9 @@ const Header = styled.div`
   font-size: 16px;
   border-radius: 5px;
   padding: 5px 60px;
-  border: .5px solid rgb(118, 118, 118);
+  border: 2px solid #eee;
   cursor: pointer;
+  background-color: white;
 `;
 
 const ArrowIcon = styled.div`
@@ -41,12 +45,12 @@ const PeopleIcon = styled.div`
 
 const Option = styled.div`
   position: relative;
-  font: Arial;
-  font-size: 18px;
-  padding: 3px 20px;
+  font-family: 'Arial';
+  font-size: 16px;
+  padding: 20px 20px;
   cursor: pointer;
   &:hover {
-    background: lightgrey;
+    background: #eee;
   }
 
   ${(props) => props.selected && css`
@@ -126,8 +130,8 @@ class FindTablePeople extends React.Component {
                     onClick={() => this.handleChoice(chosen)}
                   >
                     {num === 1 ?
-                    <p>{num} person</p> :
-                    <p>{num} people</p>
+                    <span>{num} person</span> :
+                    <span>{num} people</span>
                     }
                   </Option>
                 )

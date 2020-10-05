@@ -11,26 +11,27 @@ import icons from '../../icons.jsx';
 const Frame = styled.div`
   width: 420px;
   height: 30px;
-  border: .5px solid rgb(118, 118, 118);
+  border: 2px solid #eee;
+  background-color: white;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const Border = styled.div`
   width: 300px;
   box-shadow: 10px 10px 10px 10px #eee;
   position: absolute;
-  transform: translate(70px, 33px);
+  transform: translate(70px, 14px);
   z-index: 2;
   background-color: white;
 `;
 
 const Header = styled.div`
-  position: absolute;
+  position: flex;
   width: 200px;
   transform: translate(40px, 7px);
   font-family: 'Arial';
   font-size: 16px;
-  cursor: pointer;
 `;
 
 const DropDownHeader = styled.div`
@@ -77,7 +78,7 @@ const RightIcon = styled.div`
 
 const DayBody = styled.div`
   width: 14%;
-  height: 50px;
+  height: 40px;
   border-radius: 50%;
   appearance: textfield;
   display: flex;
@@ -89,7 +90,7 @@ const DayBody = styled.div`
   cursor: pointer;
   font-family: 'Arial';
   &:hover {
-    background: lightgrey;
+    background-color: lightgrey;
   }
 
   ${(props) => props.isToday && css`
@@ -99,6 +100,7 @@ const DayBody = styled.div`
   ${(props) => props.isSelected && css`
     background-color: #ff0000;
     color: white;`}
+
 `;
 
 
@@ -157,8 +159,8 @@ class FindTableCalendar extends Component {
     return (
       <Frame>
           <Header
-            onKeyPress={this.handleToggle}
-            onClick={this.handleToggle}
+          onKeyPress={this.handleToggle}
+          onClick={this.handleToggle}
           >
             <span>
               {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day + ', ' + year}
