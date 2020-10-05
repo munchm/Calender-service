@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from 'React';
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable no-nested-ternary */
+import React from 'react';
 import styled, { css } from 'styled-components';
-import icons from '../icons.jsx';
+import icons from '../icons';
+
+const Filler = styled.div`
+`;
 
 const Frame = styled.div`
   width: 200px;
@@ -73,18 +78,20 @@ class People extends React.Component {
   }
 
   handleOpen() {
+    const { open } = this.state;
     this.setState({
-      open: !this.state.open
-    })
+      open: !open,
+    });
   }
 
   handleChoice(number) {
     this.setState({
-      choice: number
-    })
+      choice: number,
+    });
   }
 
   render() {
+    const { open, choice, number } = this.state;
     const selection = [1, 2, 3, 4, 5, 6];
     // console.log(this.state.choice)
     return (
@@ -94,7 +101,7 @@ class People extends React.Component {
           onClick={this.handleOpen}
         >
           <PeopleIcon>
-            <svg viewBox='0 0 20 20'>
+            <svg viewBox="0 0 20 20">
               <g color="grey" fill="currentcolor">
                 <path d={icons.maleIcon} />
               </g>
@@ -102,43 +109,45 @@ class People extends React.Component {
             </svg>
           </PeopleIcon>
           {
-            this.state.choice === null ?
-            (this.state.number === 1 ?
-            <p>{this.state.number} person</p> :
-            <p>{this.state.number} people</p>) :
-            this.state.number === 1 ?
-            <p>{this.state.choice} person</p> :
-            <p>{this.state.choice} people</p>
+            choice === null
+              ? (number === 1
+                ? <p>{number} person</p>
+                : <p>{number} people</p>)
+              : number === 1
+                ? <p>{choice} person</p>
+                : <p>{choice} people</p>
           }
           <ArrowIcon>
-            <svg viewBox='0 0 20 20'>
+            <svg viewBox="0 0 20 20">
               <path d={icons.arrowIcon} />
             </svg>
           </ArrowIcon>
         </Header>
-        <div
+        <Filler
           onClick={this.handleOpen}
-          >
-          {this.state.open && (
+        >
+          {open && (
             <Border>
               {selection.map((num, index) => {
-                const chosen = num
+                const chosen = num;
+                const key = index;
                 return (
                   <Option
-                    key={index}
-                    selected={chosen === this.state.choice}
+                    key={key}
+                    selected={chosen === choice}
                     onClick={() => this.handleChoice(chosen)}
                   >
-                    {num === 1 ?
-                    <span>{num} person</span> :
-                    <span>{num} people</span>
+                    {
+                    num === 1
+                      ? <span>{num} person</span>
+                      : <span>{num} people</span>
                     }
                   </Option>
-                )
+                );
               })}
             </Border>
           )}
-        </div>
+        </Filler>
       </Frame>
     );
   }

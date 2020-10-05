@@ -1,10 +1,10 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import Calendar from './Calendar.jsx';
-import ReservationTimes from './ReservationTimes.jsx';
-import People from './People.jsx';
-import FindTable from './FindTable/FindTable.jsx';
+import styled from 'styled-components';
 import axios from 'axios';
+import Calendar from './Calendar';
+import ReservationTimes from './ReservationTimes';
+import People from './People';
+import FindTable from './FindTable/FindTable';
 
 const HtmlPage = styled.body`
   position: fixed;
@@ -48,12 +48,6 @@ const InlineRow = styled.div`
   gap: 12px
 `;
 
-
-
-const Column = styled.div`
-  flex: ${(props) => props.size}
-`;
-
 const randNum = Math.floor(Math.random() * 100);
 // restaurantId
 // reservationDate
@@ -75,35 +69,27 @@ class Homepage extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: '',
       restaurantData: '',
-      time: '',
       modalToggle: false,
-    }
-    this.getApiData = this.getApiData.bind(this);
+    };
+    // this.getApiData = this.getApiData.bind(this);
     this.getApiRestaurant = this.getApiRestaurant.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
   }
 
   async componentDidMount() {
-    await this.getApiRestaurant(randNum)
+    await this.getApiRestaurant(randNum);
   }
 
-  getApiData() {
-    axios.get('/api/calendar')
-      .then((res) => {
-        this.setState({
-          data: res.data
-        })
-      })
-      .catch()
-  }
-
-  handleToggle() {
-    this.setState({
-      modalToggle: !this.state.modalToggle
-    })
-  }
+  // getApiData() {
+  //   axios.get('/api/calendar')
+  //     .then((res) => {
+  //       this.setState({
+  //         data: res.data
+  //       });
+  //     })
+  //     .catch();
+  // }
 
   getApiRestaurant(id) {
     // const response = await axios.get(`/api/calendar/${id}`)
@@ -113,13 +99,20 @@ class Homepage extends React.Component {
     axios.get(`/api/calendar/${id}`)
       .then((response) => {
         this.setState({
-          restaurantData: response.data[0]
-        })
-      })
-
+          restaurantData: response.data[0],
+        });
+      });
   }
 
-  render () {
+  handleToggle() {
+    const { modalToggle } = this.state;
+    this.setState({
+      modalToggle: !modalToggle,
+    });
+  }
+
+  render() {
+    const { restaurantData } = this.state;
     // console.log(this.state)
     // const { openingTime, closingTime } = this.state.restaurantData;
     // console.log(openingTime)
@@ -129,13 +122,18 @@ class Homepage extends React.Component {
           <Header>
             <h2>Make a Reservation</h2>
           </Header>
-            <Calendar />
+          <Calendar />
           <InlineRow>
-              <ReservationTimes openingTime={this.state.restaurantData.openingTime} closingTime={this.state.restaurantData.closingTime}/>
-              <People />
+            <ReservationTimes
+              openingTime={restaurantData.openingTime}
+              closingTime={restaurantData.closingTime}
+            />
+            <People />
           </InlineRow>
           {/* <Row> */}
-            <FindTable handleToggle={this.handleToggle}/>
+          <FindTable
+            handleToggle={this.handleToggle}
+          />
           {/* </Row> */}
         </Border>
       </HtmlPage>

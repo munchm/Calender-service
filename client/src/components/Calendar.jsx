@@ -1,12 +1,9 @@
-/* eslint-disable no-multiple-empty-lines */
-/* eslint-disable no-lone-blocks */
-/* eslint-disable no-console */
-/* eslint-disable prefer-template */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import icons from '../icons.jsx';
+import icons from '../icons';
+
+const Filler = styled.div`
+`;
 
 const Frame = styled.div`
   width: 420px;
@@ -58,7 +55,7 @@ const HeaderIcon = styled.div`
   width: 30px;
   height: 30px;
   transform: translate(376px, 8px) scale(1.5, 1.5);
-`
+`;
 
 const LeftIcon = styled.div`
   width: 30px;
@@ -100,33 +97,32 @@ const DayBody = styled.div`
     color: white;`}
 `;
 
-
-
 class Calendar extends Component {
   constructor() {
     super();
     this.state = {
       today: new Date(),
-      selectedDate: '',
-      open: false
-    }
+      open: false,
+    };
     this.handleToggle = this.handleToggle.bind(this);
     this.handleNewDate = this.handleNewDate.bind(this);
   }
 
   handleToggle() {
+    const { open } = this.state;
     this.setState({
-      open: !this.state.open
-    })
+      open: !open,
+    });
   }
 
   handleNewDate(currentDay, currentMonth, currentYear) {
     this.setState({
-      today: new Date(currentYear, currentMonth, currentDay)
-    })
+      today: new Date(currentYear, currentMonth, currentDay),
+    });
   }
 
   render() {
+    const { today, open } = this.state;
     function firstDayOfMonth(date) {
       return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
     }
@@ -137,52 +133,59 @@ class Calendar extends Component {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     const todaysDate = new Date();
-    const date = this.state.today;
+    const date = today;
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
-    const startDay = firstDayOfMonth(date)
+    const startDay = firstDayOfMonth(date);
     // console.log(todaysDate)
 
     return (
       <Frame>
-          <Header
-            onKeyPress={this.handleToggle}
-            onClick={this.handleToggle}
-          >
-            {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day}
-            <HeaderIcon>
-              <svg viewBox='0 0 30 30'>
-                <path d={icons.arrowIcon} />
-              </svg>
-            </HeaderIcon>
-          </Header>
+        <Header
+          onKeyPress={this.handleToggle}
+          onClick={this.handleToggle}
+        >
+          { `${daysOfTheWeek[date.getDay()]}, ${months[month]} ${day}` }
+          <HeaderIcon>
+            <svg viewBox="0 0 30 30">
+              <path d={icons.arrowIcon} />
+            </svg>
+          </HeaderIcon>
+        </Header>
         <div className="calendarDropDown">
 
-          {this.state.open && (
+          {open && (
             <Border>
               <DropDownHeader>
 
-                <div
-                  onClick={() => {this.setState({today: new Date(year, month - 1, day)})}}> <LeftIcon>
-                    <svg viewBox='0 0 30 30'>
+                <Filler
+                  onClick={() => {
+                    this.setState({ today: new Date(year, month - 1, day) });
+                  }}
+                >
+                  <LeftIcon>
+                    <svg viewBox="0 0 30 30">
                       <path d={icons.arrowIcon} />
                     </svg>
                   </LeftIcon>
-                </div>
+                </Filler>
                 <DropDownMonth>
                   {months[month]}
                   {' '}
                   {year}
                 </DropDownMonth>
-                <div
-                  onClick={() => {this.setState({today: new Date(year, month + 1, day)})}}>
+                <Filler
+                  onClick={() => {
+                    this.setState({ today: new Date(year, month + 1, day) });
+                  }}
+                >
                   <RightIcon>
-                    <svg viewBox='0 0 30 30'>
+                    <svg viewBox="0 0 30 30">
                       <path d={icons.arrowIcon} />
                     </svg>
                   </RightIcon>
-                </div>
+                </Filler>
 
               </DropDownHeader>
               <Body>
@@ -193,19 +196,20 @@ class Calendar extends Component {
                 ))}
 
                 {Array(lastDays[month] + (startDay - 1)).fill(null).map((_, index) => {
-                  const specificDay = index - (startDay - 2)
-                  console.log(specificDay)
+                  const key = index;
+                  const specificDay = index - (startDay - 2);
+                  // console.log(specificDay);
                   return (
                     <DayBody
-                      key={index}
+                      key={key}
                       isToday={specificDay === todaysDate.getDate()}
                       isSelected={
-                        todaysDate.getDate() === this.state.today.getDate() ?
-                        specificDay === '' :
-                        specificDay === this.state.today.getDate()
+                      todaysDate.getDate() === today.getDate()
+                        ? specificDay === ''
+                        : specificDay === today.getDate()
                       }
                       onClick={() => this.handleNewDate(specificDay, month, year)}
-                      >
+                    >
                       {specificDay > 0 ? specificDay : ''}
                     </DayBody>
                   );

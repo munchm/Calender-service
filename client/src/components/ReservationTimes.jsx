@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'React';
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable no-nested-ternary */
+import React from 'react';
 import styled, { css } from 'styled-components';
-import icons from '../icons.jsx';
+import icons from '../icons';
 
 const Frame = styled.div`
   width: 200px;
@@ -31,17 +33,6 @@ const Arrow = styled.div`
 
 `;
 
-const ArrowBorder = styled.div`
-  box-shadow: 0px 0px 20px 0px #eee;
-  vertical-align: center;
-  height: 30px;
-  width: 200px;
-  position: absolute;
-  z-index: 1;
-  background-color: white;
-  transform: rotate(-180deg) scale(.4, .4) translate(0px, 0px);
-`;
-
 const HeaderIcon = styled.div`
   position: absolute;
   z-index: 1;
@@ -49,7 +40,7 @@ const HeaderIcon = styled.div`
   height: 20px;
   cursor: pointer;
   transform: translate(167px, -37px) scale(1.5, 1.5);
-`
+`;
 
 const Option = styled.div`
   font-family: 'Arial';
@@ -67,12 +58,13 @@ const Option = styled.div`
   `}
 `;
 
+const Filler = styled.div``;
+
 class ReservationTime extends React.Component {
   constructor() {
     super();
     this.state = {
       time: 9,
-      timeRange: [],
       choice: null,
       open: false,
     };
@@ -82,7 +74,9 @@ class ReservationTime extends React.Component {
   }
 
   // async componentDidMount() {
-  //   const timeRange = await new Array(this.props.closingTime - this.props.openingTime + 1).fill().map((_, index) => this.props.openingTime + index);
+  //   const timeRange = await new Array(
+  // this.props.closingTime - this.props.openingTime + 1
+  // ).fill().map((_, index) => this.props.openingTime + index);
   //   this.setState({
   //     timeRange: timeRange,
   //     time: timeRange[0],
@@ -90,19 +84,22 @@ class ReservationTime extends React.Component {
   // }
 
   handleOpen() {
+    const { open } = this.state;
     this.setState({
-      open: !this.state.open
-    })
+      open: !open,
+    });
   }
 
   handleChoice(time) {
     this.setState({
-      choice: time
-    })
+      choice: time,
+    });
   }
 
   // async range() {
-  //   const timeRange = await new Array(this.props.closingTime - this.props.openingTime + 1).fill().map((_, index) => this.props.openingTime + index);
+  //   const timeRange = await new Array(
+  // this.props.closingTime - this.props.openingTime + 1
+  // ).fill().map((_, index) => this.props.openingTime + index);
   //   await console.log(timeRange)
   //   return await timeRange;
   //   this.setState({
@@ -112,27 +109,30 @@ class ReservationTime extends React.Component {
 
   render() {
     // console.log(this.props)
+    const { time, open, choice } = this.state;
     const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
-    // const timeRange = new Array(this.props.closingTime - this.props.openingTime + 1).fill().map((_, index) => this.props.openingTime + index);
+    // const timeRange = new Array(
+    // this.props.closingTime - this.props.openingTime + 1)
+    // .fill().map((_, index) => this.props.openingTime + index);
     // console.log(timeRange)
     return (
       <Frame
         onClick={this.handleOpen}
       >
-        <div
+        <Filler
           tabIndex={0}
           role="button"
           onClick={this.handleOpen}
         >
           <Header>
             {
-            this.state.choice === null ?
-            (this.state.time <= 12 ?
-            <p>{this.state.time}:00 AM</p> :
-            <p>{this.state.time - 12}:00 PM</p>) :
-            this.state.choice <= 12 ?
-            <p>{this.state.choice}:00 AM</p> :
-            <p>{this.state.choice - 12}:00 PM</p>
+            choice === null
+              ? (time <= 12
+                ? <p>{time}:00 AM</p>
+                : <p>{time - 12}:00 PM</p>)
+              : choice <= 12
+                ? <p>{choice}:00 AM</p>
+                : <p>{choice - 12}:00 PM</p>
             }
           </Header>
           <HeaderIcon>
@@ -140,26 +140,28 @@ class ReservationTime extends React.Component {
               <path d={icons.arrowIcon} />
             </svg>
           </HeaderIcon>
-        </div>
+        </Filler>
         <Arrow>
-          {this.state.open && (
+          {open && (
             <Border
               onClick={this.handleOpen}
             >
-              {times.map((time, index) => {
-                const chosen = time
+              {times.map((eachTime, index) => {
+                const chosen = eachTime;
+                const key = index;
                 return (
                   <Option
-                    key={index}
-                    selected={chosen === this.state.choice}
+                    key={key}
+                    selected={chosen === choice}
                     onClick={() => this.handleChoice(chosen)}
                   >
-                    {chosen <= 12 ?
-                    <p>{time}:00 AM</p> :
-                    <p>{time - 12}:00 PM</p>
+                    {
+                    chosen <= 12
+                      ? <p>{time}:00 AM</p>
+                      : <p>{time - 12}:00 PM</p>
                     }
                   </Option>
-                )
+                );
               })}
             </Border>
           )}
@@ -170,5 +172,3 @@ class ReservationTime extends React.Component {
 }
 
 export default ReservationTime;
-
-

@@ -1,8 +1,8 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import FindTableCalendar from './FindTableCalendar.jsx';
-import FindTableReservationTime from './FindTableReservationTime.jsx';
-import FindTablePeople from './FindTablePeople.jsx';
+import styled from 'styled-components';
+import FindTableCalendar from './FindTableCalendar';
+import FindTableReservationTime from './FindTableReservationTime';
+import FindTablePeople from './FindTablePeople';
 
 const Frame = styled.div`
 `;
@@ -47,18 +47,6 @@ const Header = styled.div`
   color: white;
 `;
 
-const SecondHeader = styled.div`
-  width: 420px;
-  border: 2px solid black;
-  padding: 10px 20px 10px 20px;
-  font-size: 30px;
-  font-weight: bold;
-  position: absolute;
-  justify-content: center;
-  background-color: blue;
-  color: white;
-`;
-
 const InlineRow = styled.div`
   align-content: center;
   justify-content: center;
@@ -67,29 +55,25 @@ const InlineRow = styled.div`
   gap: 22px
 `;
 
-const Column = styled.div`
-  flex: ${(props) => props.size}
-`;
-
-
 class FindTable extends React.Component {
   constructor() {
     super();
     this.state = {
       open: false,
-    }
+    };
     this.handleToggle = this.handleToggle.bind(this);
-
   }
 
   handleToggle() {
+    const { open } = this.state;
     this.setState({
-      open: !this.state.open
-    })
+      open: !open,
+    });
   }
 
   render() {
-    console.log(this.props.handleToggle)
+    const { open } = this.state;
+    // console.log(this.props.handleToggle)
     return (
       <Frame>
         <Header
@@ -98,7 +82,7 @@ class FindTable extends React.Component {
         >
           Find a Table
         </Header>
-        {this.state.open && (
+        {open && (
           <BackdropModal>
             <Modal>
               <Calendar>
@@ -112,7 +96,7 @@ class FindTable extends React.Component {
           </BackdropModal>
         )}
       </Frame>
-    )
+    );
   }
 }
 

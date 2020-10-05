@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'React';
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable no-nested-ternary */
+import React from 'react';
 import styled, { css } from 'styled-components';
-import icons from '../../icons.jsx';
+import icons from '../../icons';
 
 const Frame = styled.div`
   width: 200px;
@@ -35,17 +37,6 @@ const Arrow = styled.div`
 
 `;
 
-const ArrowBorder = styled.div`
-  box-shadow: 0px 0px 20px 0px #eee;
-  vertical-align: center;
-  height: 30px;
-  width: 200px;
-  position: absolute;
-  z-index: 1;
-  background-color: white;
-  transform: rotate(-180deg) scale(.4, .4) translate(0px, 0px);
-`;
-
 const ArrowIcon = styled.div`
   position: absolute;
   z-index: 1;
@@ -53,7 +44,7 @@ const ArrowIcon = styled.div`
   height: 20px;
   cursor: pointer;
   transform: translate(170px, -22px) scale(1.5, 1.5);
-`
+`;
 
 const Option = styled.div`
   font-family: 'Arial';
@@ -84,19 +75,20 @@ class FindTableReservationTime extends React.Component {
   }
 
   handleOpen() {
+    const { open } = this.state;
     this.setState({
-      open: !this.state.open
-    })
+      open: !open,
+    });
   }
 
-  handleChoice(time) {
+  handleChoice(chosenTime) {
     this.setState({
-      choice: time
-    })
+      choice: chosenTime,
+    });
   }
-
 
   render() {
+    const { time, open, choice } = this.state;
     const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
     return (
       <Frame
@@ -109,13 +101,13 @@ class FindTableReservationTime extends React.Component {
         >
           <Header>
             {
-            this.state.choice === null ?
-            (this.state.time <= 12 ?
-            <span>{this.state.time}:00 AM</span> :
-            <span>{this.state.time - 12}:00 PM</span>) :
-            this.state.choice <= 12 ?
-            <span>{this.state.choice}:00 AM</span> :
-            <span>{this.state.choice - 12}:00 PM</span>
+            choice === null
+              ? (time <= 12
+                ? <span>{time}:00 AM</span>
+                : <span>{time - 12}:00 PM</span>)
+              : choice <= 12
+                ? <span>{choice}:00 AM</span>
+                : <span>{choice - 12}:00 PM</span>
             }
           </Header>
           <ArrowIcon>
@@ -125,24 +117,26 @@ class FindTableReservationTime extends React.Component {
           </ArrowIcon>
         </Border>
         <Arrow>
-          {this.state.open && (
+          {open && (
             <Modal
               onClick={this.handleOpen}
             >
-              {times.map((time, index) => {
-                const chosen = time
+              {times.map((eachTime, index) => {
+                const chosen = eachTime;
+                const key = index;
                 return (
                   <Option
-                    key={index}
-                    selected={chosen === this.state.choice}
+                    key={key}
+                    selected={chosen === choice}
                     onClick={() => this.handleChoice(chosen)}
                   >
-                    {chosen <= 12 ?
-                    <span>{time}:00 AM</span> :
-                    <span>{time - 12}:00 PM</span>
+                    {
+                    chosen <= 12
+                      ? <span>{time}:00 AM</span>
+                      : <span>{time - 12}:00 PM</span>
                     }
                   </Option>
-                )
+                );
               })}
             </Modal>
           )}
@@ -153,5 +147,3 @@ class FindTableReservationTime extends React.Component {
 }
 
 export default FindTableReservationTime;
-
-
