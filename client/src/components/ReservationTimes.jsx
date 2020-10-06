@@ -104,6 +104,7 @@ class ReservationTime extends React.Component {
     });
   }
 
+
   // async range() {
   //   const timeRange = await new Array(
   // this.props.closingTime - this.props.openingTime + 1
