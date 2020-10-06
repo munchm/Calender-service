@@ -29,9 +29,7 @@ const Header = styled.div`
   cursor: pointer;
 `;
 
-const Arrow = styled.div`
-
-`;
+const Arrow = styled.div``;
 
 const HeaderIcon = styled.div`
   position: absolute;
@@ -67,10 +65,20 @@ class ReservationTime extends React.Component {
       time: 9,
       choice: null,
       open: false,
+      timesArray: [],
     };
     this.handleChoice = this.handleChoice.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     // this.range = this.range.bind(this);
+  }
+
+  async componentDidMount() {
+    const {passReservationTimes } = this.props;
+    const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+    await this.setState({
+      timesArray: times,
+    });
+    await passReservationTimes(this.state.timesArray);
   }
 
   // async componentDidMount() {
@@ -111,6 +119,8 @@ class ReservationTime extends React.Component {
     // console.log(this.props)
     const { time, open, choice } = this.state;
     const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+    // const { passReservationTimes } = this.props;
+    // passReservationTimes(times || null);
     // const timeRange = new Array(
     // this.props.closingTime - this.props.openingTime + 1)
     // .fill().map((_, index) => this.props.openingTime + index);
@@ -157,8 +167,8 @@ class ReservationTime extends React.Component {
                   >
                     {
                     chosen <= 12
-                      ? <p>{time}:00 AM</p>
-                      : <p>{time - 12}:00 PM</p>
+                      ? <p>{chosen}:00 AM</p>
+                      : <p>{chosen - 12}:00 PM</p>
                     }
                   </Option>
                 );

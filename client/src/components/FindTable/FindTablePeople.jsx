@@ -11,6 +11,7 @@ const Frame = styled.div`
 const Border = styled.div`
   box-shadow: 5px 5px 5px 5px #eee;
   position: absolute;
+  z-index: 5;
   width: 195px;
   height: 300px;
   padding: 5px 5px;
