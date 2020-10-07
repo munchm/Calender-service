@@ -9,7 +9,7 @@ const Frame = styled.div``;
 
 const BackdropModal = styled.div`
   position: fixed;
-  background: lightgrey;
+  background: white;
   z-index: 5;
   margin: auto;
   top: 0px;
@@ -99,6 +99,22 @@ const TimeSlots = styled.div`
   border-radius: 5px;
 `;
 
+const ExitButton = styled.div`
+  display: flex;
+  width: 100px;
+  padding: 2px;
+  position: absolute;
+  font-size: x-large;
+  background-color: white;
+  transform: translate(500px, 200px);
+  justify-content: center;
+  color: black;
+  &:hover {
+    background-color: blue;
+    color: white;
+  }
+`;
+
 class FindTable extends React.Component {
   constructor() {
     super();
@@ -117,10 +133,13 @@ class FindTable extends React.Component {
   }
 
   handleToggle() {
-    const { open } = this.state;
+    const { open, showTimes } = this.state;
     this.setState({
       open: !open,
     });
+    if (showTimes === true) {
+      this.handleInnerToggle();
+    }
   }
 
   handleInnerToggle() {
@@ -145,7 +164,9 @@ class FindTable extends React.Component {
   }
 
   render() {
-    const { timesArray } = this.props;
+    const {
+      timesArray, passDay, passMonth, passDayOfTheWeek, chosenTime
+    } = this.props;
     const {
       open, day, month, num, showTimes, chosen,
     } = this.state;
@@ -163,16 +184,22 @@ class FindTable extends React.Component {
         </Header>
         {open && (
           <BackdropModal>
+            <ExitButton
+              onClick={this.handleToggle}
+            >
+              Exit
+            </ExitButton>
             <Modal>
               <InlineRow>
                 <FindTableCalendar
                   grabDate={this.grabDate}
-                  day1={this.props.day}
-                  month1={this.props.month}
-                  dayOfTheWeek={this.props.dayOfTheWeek}
+                  passDay={passDay}
+                  passMonth={passMonth}
+                  passDayOfTheWeek={passDayOfTheWeek}
                   // {this.props.day, this.props.month, this.props.day}
                 />
                 <FindTableReservationTime
+                  chosenTime={chosenTime}
                   grabTime={this.grabTime}
                   onClick={this.handleInnerToggle}
                 />
@@ -183,7 +210,9 @@ class FindTable extends React.Component {
                 {showTimes && (
                   <SecondRow>
                     <SecondRowDate>
-                      {`${daysOfTheWeek[num]}, ${months[month]} ${day}`}
+                      {/* CHANGE BACK BECAUSE CALENDAR DOESN'T UPDATE
+                      {`${daysOfTheWeek[num]}, ${months[month]} ${day}`} */}
+                      {`${daysOfTheWeek[passDayOfTheWeek]}, ${months[passMonth]} ${passDay}`}
                     </SecondRowDate>
                     {timesArray.slice(timeIndex, timeIndex + 7).map((time) => (
                       <TimeSlots key={time}>

@@ -159,7 +159,8 @@ class FindTableCalendar extends Component {
   }
 
   render() {
-    const { day1, month1, dayOfTheWeek} = this.props;
+    const { passDay, passMonth, passDayOfTheWeek} = this.props;
+    console.log(this.props)
     const { today, open } = this.state;
 
     function firstDayOfMonth(date) {
@@ -184,12 +185,13 @@ class FindTableCalendar extends Component {
           onKeyPress={this.handleToggle}
           onClick={this.handleToggle}
         >
+          {/* CHANGE BACK BECAUSE CALENDAR DOESN'T UPDATE
           <span>
             {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day + ', ' + year}
-          </span>
-          {/* <span>
-            {daysOfTheWeek[dayOfTheWeek] + ', ' + months[month1] + ' ' + day1 + ', ' + year}
           </span> */}
+          <span>
+            {daysOfTheWeek[passDayOfTheWeek] + ', ' + months[passMonth] + ' ' + passDay + ', ' + year}
+          </span>
           <HeaderIcon>
             <svg viewBox="0 0 30 30">
               <path d={icons.arrowIcon} />
@@ -228,7 +230,7 @@ class FindTableCalendar extends Component {
                   <RightIcon>
                     <svg viewBox="0 0 30 30">
                       {/* <g color="#448ee4" fill="currentcolor"> */}
-                        <path d={icons.arrowIcon} />
+                      <path d={icons.arrowIcon} />
                       {/* </g> */}
                     </svg>
                   </RightIcon>

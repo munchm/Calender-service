@@ -78,7 +78,7 @@ class ReservationTime extends React.Component {
     await this.setState({
       timesArray: times,
     });
-    await passReservationTimes(this.state.timesArray);
+    await passReservationTimes(this.state.timesArray, this.state.chosen);
   }
 
   // async componentDidMount() {
@@ -103,7 +103,6 @@ class ReservationTime extends React.Component {
       choice: time,
     });
   }
-
 
   // async range() {
   //   const timeRange = await new Array(
