@@ -74,6 +74,7 @@ class Homepage extends React.Component {
       restaurantData: '',
       modalToggle: false,
       timesArray: [],
+      chosenTime: '',
       day: '',
       month: '',
       dayOfTheWeek: '',
@@ -119,9 +120,10 @@ class Homepage extends React.Component {
     });
   }
 
-  async passReservationTimes(timesArray) {
+  async passReservationTimes(timesArray, chosenTime) {
     await this.setState({
       timesArray: timesArray,
+      chosenTime: chosenTime,
     });
   }
 
@@ -131,11 +133,13 @@ class Homepage extends React.Component {
       month: month,
       dayOfTheWeek: dayOfTheWeek,
     });
-    // console.log(this.state);
+    console.log(this.state);
   }
 
   render() {
-    const { restaurantData, timesArray } = this.state;
+    const {
+      restaurantData, timesArray, day, month, dayOfTheWeek, chosenTime,
+    } = this.state;
     // console.log(timesArray);
     // const { openingTime, closingTime } = this.state.restaurantData;
     // console.log(openingTime)
@@ -160,7 +164,11 @@ class Homepage extends React.Component {
           <FindTable
             handleToggle={this.handleToggle}
             timesArray={timesArray}
-            {...this.state}
+            chosenTime={chosenTime}
+            passDay={day}
+            passMonth={month}
+            passDayOfTheWeek={dayOfTheWeek}
+            // {...this.state}
           />
           {/* </Row> */}
         </Border>

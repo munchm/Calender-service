@@ -164,8 +164,9 @@ class FindTable extends React.Component {
   }
 
   render() {
-    console.log(this.state.showTimes)
-    const { timesArray } = this.props;
+    const {
+      timesArray, passDay, passMonth, passDayOfTheWeek, chosenTime
+    } = this.props;
     const {
       open, day, month, num, showTimes, chosen,
     } = this.state;
@@ -192,12 +193,13 @@ class FindTable extends React.Component {
               <InlineRow>
                 <FindTableCalendar
                   grabDate={this.grabDate}
-                  day1={this.props.day}
-                  month1={this.props.month}
-                  dayOfTheWeek={this.props.dayOfTheWeek}
+                  passDay={passDay}
+                  passMonth={passMonth}
+                  passDayOfTheWeek={passDayOfTheWeek}
                   // {this.props.day, this.props.month, this.props.day}
                 />
                 <FindTableReservationTime
+                  chosenTime={chosenTime}
                   grabTime={this.grabTime}
                   onClick={this.handleInnerToggle}
                 />
@@ -208,7 +210,9 @@ class FindTable extends React.Component {
                 {showTimes && (
                   <SecondRow>
                     <SecondRowDate>
-                      {`${daysOfTheWeek[num]}, ${months[month]} ${day}`}
+                      {/* CHANGE BACK BECAUSE CALENDAR DOESN'T UPDATE
+                      {`${daysOfTheWeek[num]}, ${months[month]} ${day}`} */}
+                      {`${daysOfTheWeek[passDayOfTheWeek]}, ${months[passMonth]} ${passDay}`}
                     </SecondRowDate>
                     {timesArray.slice(timeIndex, timeIndex + 7).map((time) => (
                       <TimeSlots key={time}>
