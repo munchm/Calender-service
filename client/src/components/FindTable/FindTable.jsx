@@ -9,7 +9,7 @@ const Frame = styled.div``;
 
 const BackdropModal = styled.div`
   position: fixed;
-  background: lightgrey;
+  background: white;
   z-index: 5;
   margin: auto;
   top: 0px;
@@ -99,6 +99,22 @@ const TimeSlots = styled.div`
   border-radius: 5px;
 `;
 
+const ExitButton = styled.div`
+  display: flex;
+  width: 100px;
+  padding: 2px;
+  position: absolute;
+  font-size: x-large;
+  background-color: white;
+  transform: translate(500px, 200px);
+  justify-content: center;
+  color: black;
+  &:hover {
+    background-color: blue;
+    color: white;
+  }
+`;
+
 class FindTable extends React.Component {
   constructor() {
     super();
@@ -117,10 +133,13 @@ class FindTable extends React.Component {
   }
 
   handleToggle() {
-    const { open } = this.state;
+    const { open, showTimes } = this.state;
     this.setState({
       open: !open,
     });
+    if (showTimes === true) {
+      this.handleInnerToggle();
+    }
   }
 
   handleInnerToggle() {
@@ -145,6 +164,7 @@ class FindTable extends React.Component {
   }
 
   render() {
+    console.log(this.state.showTimes)
     const { timesArray } = this.props;
     const {
       open, day, month, num, showTimes, chosen,
@@ -163,6 +183,11 @@ class FindTable extends React.Component {
         </Header>
         {open && (
           <BackdropModal>
+            <ExitButton
+              onClick={this.handleToggle}
+            >
+              Exit
+            </ExitButton>
             <Modal>
               <InlineRow>
                 <FindTableCalendar

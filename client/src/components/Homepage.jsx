@@ -140,7 +140,9 @@ class Homepage extends React.Component {
     // const { openingTime, closingTime } = this.state.restaurantData;
     // console.log(openingTime)
     return (
-      <HtmlPage>
+      <HtmlPage
+        onClick={() => this.exitModal}
+      >
         <Border>
           <Header>
             <h2>Make a Reservation</h2>
