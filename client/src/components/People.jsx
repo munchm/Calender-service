@@ -4,9 +4,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import icons from '../icons';
 
-const Filler = styled.div`
-`;
-
 const Frame = styled.div`
   width: 200px;
 `;
@@ -62,8 +59,9 @@ const Option = styled.div`
     background-color: rgba(10,179,201,.1);
     color: #00838f;
   `}
-
 `;
+
+const Filler = styled.div``;
 
 class People extends React.Component {
   constructor() {

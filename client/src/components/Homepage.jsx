@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable object-shorthand */
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -6,8 +8,9 @@ import ReservationTimes from './ReservationTimes';
 import People from './People';
 import FindTable from './FindTable/FindTable';
 
-const HtmlPage = styled.body`
-  position: fixed;
+const HtmlPage = styled.div`
+  display: flex;
+  position: relative;
   top: 0px;
   right: 0px;
   bottom: 0px;
@@ -16,9 +19,8 @@ const HtmlPage = styled.body`
 `;
 
 const Border = styled.div`
-  position: fixed;
+  position: relative;
   width: 425px;
-  left: 150px;
   background-color: #fff;
   border-radius: 4px;
   border: 2px solid #eee;
@@ -71,10 +73,16 @@ class Homepage extends React.Component {
     this.state = {
       restaurantData: '',
       modalToggle: false,
+      timesArray: [],
+      day: '',
+      month: '',
+      dayOfTheWeek: '',
     };
     // this.getApiData = this.getApiData.bind(this);
     this.getApiRestaurant = this.getApiRestaurant.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+    this.passReservationTimes = this.passReservationTimes.bind(this);
+    this.passCalendarDate = this.passCalendarDate.bind(this);
   }
 
   async componentDidMount() {
@@ -111,9 +119,24 @@ class Homepage extends React.Component {
     });
   }
 
+  async passReservationTimes(timesArray) {
+    await this.setState({
+      timesArray: timesArray,
+    });
+  }
+
+  async passCalendarDate(day, month, dayOfTheWeek) {
+    await this.setState({
+      day: day,
+      month: month,
+      dayOfTheWeek: dayOfTheWeek,
+    });
+    // console.log(this.state);
+  }
+
   render() {
-    const { restaurantData } = this.state;
-    // console.log(this.state)
+    const { restaurantData, timesArray } = this.state;
+    // console.log(timesArray);
     // const { openingTime, closingTime } = this.state.restaurantData;
     // console.log(openingTime)
     return (
@@ -122,17 +145,20 @@ class Homepage extends React.Component {
           <Header>
             <h2>Make a Reservation</h2>
           </Header>
-          <Calendar />
+          <Calendar passCalendarDate={this.passCalendarDate} />
           <InlineRow>
             <ReservationTimes
-              openingTime={restaurantData.openingTime}
+              openingTime={restaurantData.openingTime || null}
               closingTime={restaurantData.closingTime}
+              passReservationTimes={this.passReservationTimes}
             />
             <People />
           </InlineRow>
           {/* <Row> */}
           <FindTable
             handleToggle={this.handleToggle}
+            timesArray={timesArray}
+            {...this.state}
           />
           {/* </Row> */}
         </Border>

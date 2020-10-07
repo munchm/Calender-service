@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import icons from '../icons';
 
-const Filler = styled.div`
-`;
-
 const Frame = styled.div`
   width: 420px;
   border: 2px solid #eee;
@@ -97,6 +94,8 @@ const DayBody = styled.div`
     color: white;`}
 `;
 
+const Filler = styled.div``;
+
 class Calendar extends Component {
   constructor() {
     super();
@@ -115,10 +114,12 @@ class Calendar extends Component {
     });
   }
 
-  handleNewDate(currentDay, currentMonth, currentYear) {
+  async handleNewDate(currentDay, currentMonth, currentYear, dayOfTheWeek) {
+    const { passCalendarDate } = this.props;
     this.setState({
       today: new Date(currentYear, currentMonth, currentDay),
     });
+    await passCalendarDate(currentDay, currentMonth, dayOfTheWeek);
   }
 
   render() {
@@ -208,7 +209,9 @@ class Calendar extends Component {
                         ? specificDay === ''
                         : specificDay === today.getDate()
                       }
-                      onClick={() => this.handleNewDate(specificDay, month, year)}
+                      onClick={() => this.handleNewDate(
+                        specificDay, month, year, new Date(year, month, specificDay).getDay(),
+                      )}
                     >
                       {specificDay > 0 ? specificDay : ''}
                     </DayBody>

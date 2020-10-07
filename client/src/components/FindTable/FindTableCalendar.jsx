@@ -123,6 +123,15 @@ class FindTableCalendar extends Component {
     this.handleNewDate = this.handleNewDate.bind(this);
   }
 
+  // componentDidMount() {
+  //   const { day1, month1, dayOfTheWeek} = this.props;
+  //   const year = 2020;
+  //   this.setState({
+  //     today: new Date(year, month1, day1),
+  //   });
+  //   console.log(this.state.today);
+  // }
+
   handleToggle() {
     const { open } = this.state;
     this.setState({
@@ -130,10 +139,17 @@ class FindTableCalendar extends Component {
     });
   }
 
-  handleNewDate(currentDay, currentMonth, currentYear) {
+  async handleNewDate(currentDay, currentMonth, currentYear, dayOfTheWeek) {
+    const { today } = this.state;
+    // const { grabDate } = this.props;
     this.setState({
       today: new Date(currentYear, currentMonth, currentDay),
     });
+    await this.props.grabDate(currentDay, currentMonth, dayOfTheWeek);
+
+    // setInterval(() => {
+    //   this.props.grabDate(currentDay, currentMonth, dayOfTheWeek), 1000);
+    // clearInterval(this.props.grabDate);
   }
 
   handleReservationTime(selectedTime) {
@@ -143,6 +159,7 @@ class FindTableCalendar extends Component {
   }
 
   render() {
+    const { day1, month1, dayOfTheWeek} = this.props;
     const { today, open } = this.state;
 
     function firstDayOfMonth(date) {
@@ -160,7 +177,6 @@ class FindTableCalendar extends Component {
     const month = date.getMonth();
     const year = date.getFullYear();
     const startDay = firstDayOfMonth(date);
-    console.log(todaysDate);
 
     return (
       <Frame>
@@ -171,6 +187,9 @@ class FindTableCalendar extends Component {
           <span>
             {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day + ', ' + year}
           </span>
+          {/* <span>
+            {daysOfTheWeek[dayOfTheWeek] + ', ' + months[month1] + ' ' + day1 + ', ' + year}
+          </span> */}
           <HeaderIcon>
             <svg viewBox="0 0 30 30">
               <path d={icons.arrowIcon} />
@@ -208,9 +227,9 @@ class FindTableCalendar extends Component {
                 >
                   <RightIcon>
                     <svg viewBox="0 0 30 30">
-                      <g color="#448ee4" fill="currentcolor">
+                      {/* <g color="#448ee4" fill="currentcolor"> */}
                         <path d={icons.arrowIcon} />
-                      </g>
+                      {/* </g> */}
                     </svg>
                   </RightIcon>
                 </Filler>
@@ -226,7 +245,6 @@ class FindTableCalendar extends Component {
                 {Array(lastDays[month] + (startDay - 1)).fill(null).map((_, index) => {
                   const specificDay = index - (startDay - 2);
                   const key = index;
-                  console.log(specificDay);
                   return (
                     <DayBody
                       key={key}
@@ -236,7 +254,9 @@ class FindTableCalendar extends Component {
                           ? specificDay === ''
                           : specificDay === today.getDate()
                       }
-                      onClick={() => this.handleNewDate(specificDay, month, year)}
+                      onClick={() => this.handleNewDate(
+                        specificDay, month, year, new Date(year, month, specificDay).getDay(),
+                      )}
                     >
                       {specificDay > 0 ? specificDay : ''}
 

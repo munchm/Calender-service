@@ -1,35 +1,28 @@
+/* eslint-disable object-shorthand */
 import React from 'react';
 import styled from 'styled-components';
 import FindTableCalendar from './FindTableCalendar';
 import FindTableReservationTime from './FindTableReservationTime';
 import FindTablePeople from './FindTablePeople';
 
-const Frame = styled.div`
-`;
+const Frame = styled.div``;
 
 const BackdropModal = styled.div`
   position: fixed;
   background: lightgrey;
   z-index: 5;
-  margin: 0;
+  margin: auto;
   top: 0px;
   right: 0px;
   bottom: 0px;
-  left: 0px;
+  left: -10px;
 `;
 
 const Modal = styled.div`
   position: relative;
   margin: 0;
-  left: 50px;
-  top: 50px;
   z-index: 8;
-`;
-
-const Calendar = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 13px 0px;
+  width: 500px;
 `;
 
 const Header = styled.div`
@@ -48,11 +41,62 @@ const Header = styled.div`
 `;
 
 const InlineRow = styled.div`
-  align-content: center;
+  position: absolute;
+  top: 50px;
+  left: 50px;
   justify-content: center;
   display: flex;
   flex-direction: row;
   gap: 22px
+`;
+
+const SecondRow = styled.div`
+  position: absolute;
+  top: 80px;
+  height: 32px;
+  width: 1000px;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 22px;
+  overflow-x: hidden;
+`;
+
+const FindaTable = styled.div`
+  display: flex;
+  width: 120px;
+  height: 17px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-family: 'Helvetica Neue';
+  text-align: center;
+  justify-content: center;
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+`;
+
+const SecondRowDate = styled.div`
+  display: flex;
+  width: 180px;
+  font-size: 22px;
+  font-family: 'Helvetica Neue';
+  justify-content: center;
+  color: black;
+  border-radius: 5px;
+`;
+
+const TimeSlots = styled.div`
+  display: inline-flex;
+  align-content: center;
+  justify-content: center;
+  width: 150px;
+  height: 17px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-family: 'Helvetica Neue';
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
 `;
 
 class FindTable extends React.Component {
@@ -60,8 +104,16 @@ class FindTable extends React.Component {
     super();
     this.state = {
       open: false,
+      day: '',
+      month: '',
+      num: '',
+      chosen: 9,
+      showTimes: false,
     };
     this.handleToggle = this.handleToggle.bind(this);
+    this.grabDate = this.grabDate.bind(this);
+    this.handleInnerToggle = this.handleInnerToggle.bind(this);
+    this.grabTime = this.grabTime.bind(this);
   }
 
   handleToggle() {
@@ -71,9 +123,36 @@ class FindTable extends React.Component {
     });
   }
 
+  handleInnerToggle() {
+    const { showTimes } = this.state;
+    this.setState({
+      showTimes: !showTimes,
+    });
+  }
+
+  async grabDate(day, month, num) {
+    await this.setState({
+      day: day,
+      month: month,
+      num: num,
+    });
+  }
+
+  async grabTime(chosen) {
+    await this.setState({
+      chosen: chosen,
+    });
+  }
+
   render() {
-    const { open } = this.state;
-    // console.log(this.props.handleToggle)
+    const { timesArray } = this.props;
+    const {
+      open, day, month, num, showTimes, chosen,
+    } = this.state;
+    const timeIndex = timesArray.indexOf(chosen);
+    const daysOfTheWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
     return (
       <Frame>
         <Header
@@ -85,12 +164,48 @@ class FindTable extends React.Component {
         {open && (
           <BackdropModal>
             <Modal>
-              <Calendar>
-                <FindTableCalendar />
-              </Calendar>
               <InlineRow>
-                <FindTableReservationTime />
-                <FindTablePeople />
+                <FindTableCalendar
+                  grabDate={this.grabDate}
+                  day1={this.props.day}
+                  month1={this.props.month}
+                  dayOfTheWeek={this.props.dayOfTheWeek}
+                  // {this.props.day, this.props.month, this.props.day}
+                />
+                <FindTableReservationTime
+                  grabTime={this.grabTime}
+                  onClick={this.handleInnerToggle}
+                />
+                <FindTablePeople onClick={this.handleInnerToggle} />
+                <FindaTable onClick={this.handleInnerToggle}>
+                  Find a Table
+                </FindaTable>
+                {showTimes && (
+                  <SecondRow>
+                    <SecondRowDate>
+                      {`${daysOfTheWeek[num]}, ${months[month]} ${day}`}
+                    </SecondRowDate>
+                    {timesArray.slice(timeIndex, timeIndex + 7).map((time) => (
+                      <TimeSlots key={time}>
+                        {
+                            time <= 12
+                              ? (
+                                <span>
+                                  {time}
+                                  :00 AM
+                                </span>
+                              )
+                              : (
+                                <span>
+                                  {time - 12}
+                                  :00 PM
+                                </span>
+                              )
+                          }
+                      </TimeSlots>
+                    ))}
+                  </SecondRow>
+                )}
               </InlineRow>
             </Modal>
           </BackdropModal>

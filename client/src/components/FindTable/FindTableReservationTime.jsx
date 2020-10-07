@@ -14,6 +14,7 @@ const Border = styled.div`
 const Modal = styled.div`
   font-size: 18px;
   position: absolute;
+  z-index: 5;
   width: 190px;
   height: 300px;
   overflow-y: scroll;
@@ -85,6 +86,7 @@ class FindTableReservationTime extends React.Component {
     this.setState({
       choice: chosenTime,
     });
+    this.props.grabTime(chosenTime);
   }
 
   render() {
@@ -132,8 +134,8 @@ class FindTableReservationTime extends React.Component {
                   >
                     {
                     chosen <= 12
-                      ? <span>{time}:00 AM</span>
-                      : <span>{time - 12}:00 PM</span>
+                      ? <span>{chosen}:00 AM</span>
+                      : <span>{chosen - 12}:00 PM</span>
                     }
                   </Option>
                 );
