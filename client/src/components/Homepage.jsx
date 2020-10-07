@@ -8,18 +8,10 @@ import ReservationTimes from './ReservationTimes';
 import People from './People';
 import FindTable from './FindTable/FindTable';
 
-const HtmlPage = styled.div`
-  display: flex;
-  position: relative;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  z-index: 0;
-`;
-
 const Border = styled.div`
   position: relative;
+  display: block;
+  margin: auto;
   width: 425px;
   background-color: #fff;
   border-radius: 4px;
@@ -144,35 +136,31 @@ class Homepage extends React.Component {
     // const { openingTime, closingTime } = this.state.restaurantData;
     // console.log(openingTime)
     return (
-      <HtmlPage
-        onClick={() => this.exitModal}
-      >
-        <Border>
-          <Header>
-            <h2>Make a Reservation</h2>
-          </Header>
-          <Calendar passCalendarDate={this.passCalendarDate} />
-          <InlineRow>
-            <ReservationTimes
-              openingTime={restaurantData.openingTime || null}
-              closingTime={restaurantData.closingTime}
-              passReservationTimes={this.passReservationTimes}
-            />
-            <People />
-          </InlineRow>
-          {/* <Row> */}
-          <FindTable
-            handleToggle={this.handleToggle}
-            timesArray={timesArray}
-            chosenTime={chosenTime}
-            passDay={day}
-            passMonth={month}
-            passDayOfTheWeek={dayOfTheWeek}
-            // {...this.state}
+      <Border>
+        <Header>
+          <h2>Make a Reservation</h2>
+        </Header>
+        <Calendar passCalendarDate={this.passCalendarDate} />
+        <InlineRow>
+          <ReservationTimes
+            openingTime={restaurantData.openingTime || null}
+            closingTime={restaurantData.closingTime}
+            passReservationTimes={this.passReservationTimes}
           />
-          {/* </Row> */}
-        </Border>
-      </HtmlPage>
+          <People />
+        </InlineRow>
+        {/* <Row> */}
+        <FindTable
+          handleToggle={this.handleToggle}
+          timesArray={timesArray}
+          chosenTime={chosenTime}
+          passDay={day}
+          passMonth={month}
+          passDayOfTheWeek={dayOfTheWeek}
+          // {...this.state}
+        />
+        {/* </Row> */}
+      </Border>
     );
   }
 }
