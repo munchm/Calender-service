@@ -9,7 +9,7 @@ import People from './People';
 import FindTable from './FindTable/FindTable';
 
 const Border = styled.div`
-  position: relative;
+  position: fixed;
   display: block;
   margin: auto;
   width: 425px;
@@ -125,7 +125,7 @@ class Homepage extends React.Component {
       month: month,
       dayOfTheWeek: dayOfTheWeek,
     });
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   render() {
