@@ -70,7 +70,7 @@ const FindaTable = styled.div`
   font-family: 'Helvetica Neue';
   text-align: center;
   justify-content: center;
-  background-color: blue;
+  background-color: #33acf0;
   color: white;
   border-radius: 5px;
 `;
@@ -94,7 +94,7 @@ const TimeSlots = styled.div`
   padding-top: 7px;
   padding-bottom: 7px;
   font-family: 'Helvetica Neue';
-  background-color: blue;
+  background-color: #33acf0;
   color: white;
   border-radius: 5px;
 `;
@@ -110,7 +110,7 @@ const ExitButton = styled.div`
   justify-content: center;
   color: black;
   &:hover {
-    background-color: blue;
+    background-color: #33acf0;
     color: white;
   }
 `;

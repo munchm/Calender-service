@@ -11,7 +11,7 @@ import icons from '../../icons';
 
 const Frame = styled.div`
   width: 420px;
-  height: 30px;
+  height: 28px;
   border: 2px solid #eee;
   background-color: white;
   border-radius: 5px;
@@ -29,8 +29,7 @@ const Border = styled.div`
 
 const Header = styled.div`
   position: flex;
-  width: 200px;
-  transform: translate(40px, 7px);
+  transform: translate(41px, 6px);
   font-family: 'Arial';
   font-size: 16px;
 `;
@@ -55,11 +54,18 @@ const Body = styled.div`
   border-radius: 50%;
   `;
 
-const HeaderIcon = styled.div`
+const ArrowIcon = styled.div`
   position: absolute;
   width: 30px;
   height: 30px;
   transform: translate(350px, -15px) scale(1.5, 1.5);
+`;
+
+const CalendarIcon = styled.div`
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transform: translate(-30px, 0px) scale(1.1, 1.1);
 `;
 
 const LeftIcon = styled.div`
@@ -160,7 +166,7 @@ class FindTableCalendar extends Component {
 
   render() {
     const { passDay, passMonth, passDayOfTheWeek} = this.props;
-    console.log(this.props)
+    console.log(this.props);
     const { today, open } = this.state;
 
     function firstDayOfMonth(date) {
@@ -185,18 +191,23 @@ class FindTableCalendar extends Component {
           onKeyPress={this.handleToggle}
           onClick={this.handleToggle}
         >
+          <CalendarIcon>
+            <svg viewBox="0 0 30 30">
+              <g color="grey" fill="currentcolor">
+                <path d={icons.calendarIcon} />
+              </g>
+            </svg>
+          </CalendarIcon>
           {/* CHANGE BACK BECAUSE CALENDAR DOESN'T UPDATE
           <span>
             {daysOfTheWeek[date.getDay()] + ', ' + months[month] + ' ' + day + ', ' + year}
           </span> */}
-          <span>
-            {daysOfTheWeek[passDayOfTheWeek] + ', ' + months[passMonth] + ' ' + passDay + ', ' + year}
-          </span>
-          <HeaderIcon>
+          {daysOfTheWeek[passDayOfTheWeek] + ', ' + months[passMonth] + ' ' + passDay + ', ' + year}
+          <ArrowIcon>
             <svg viewBox="0 0 30 30">
               <path d={icons.arrowIcon} />
             </svg>
-          </HeaderIcon>
+          </ArrowIcon>
         </Header>
         <div className="calendarDropDown">
 
