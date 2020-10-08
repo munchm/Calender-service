@@ -24,7 +24,9 @@ const Header = styled.div`
   font-family: 'Arial';
   font-size: 16px;
   border-radius: 5px;
-  padding: 5px 60px;
+  height: 22px;
+  padding-left: 37px;
+  padding-top: 6px;
   border: 2px solid #eee;
   cursor: pointer;
   background-color: white;
@@ -35,7 +37,7 @@ const ArrowIcon = styled.div`
   z-index: 1;
   width: 20px;
   height: 20px;
-  transform: translate(104px, -16px) scale(1.5, 1.5);
+  transform: translate(130px, -16px) scale(1.5, 1.5);
 `;
 
 const PeopleIcon = styled.div`
@@ -43,7 +45,7 @@ const PeopleIcon = styled.div`
   z-index: 1;
   width: 20px;
   height: 20px;
-  transform: translate(-45px, 2px) scale(1.5, 1.5);
+  transform: translate(-30px, -1px) scale(1.3, 1.3);
 `;
 
 const Option = styled.div`

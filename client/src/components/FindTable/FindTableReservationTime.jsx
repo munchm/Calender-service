@@ -25,7 +25,9 @@ const Modal = styled.div`
 `;
 
 const Header = styled.div`
-  padding: 5px 40px;
+  padding: 0px 40px;
+  padding-top: 6px;
+  padding-bottom: 4px;
   border: 2px solid #eee;
   font-family: 'Arial';
   font-size: 16px;
@@ -34,8 +36,15 @@ const Header = styled.div`
   cursor: pointer;
 `;
 
-const Arrow = styled.div`
+const Arrow = styled.div``;
 
+const ClockIcon = styled.div`
+  position: absolute;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transform: translate(-30px, 0px) scale(1.2, 1.2);
 `;
 
 const ArrowIcon = styled.div`
@@ -44,7 +53,7 @@ const ArrowIcon = styled.div`
   width: 20px;
   height: 20px;
   cursor: pointer;
-  transform: translate(170px, -22px) scale(1.5, 1.5);
+  transform: translate(167px, -22px) scale(1.5, 1.5);
 `;
 
 const Option = styled.div`
@@ -102,6 +111,13 @@ class FindTableReservationTime extends React.Component {
           onClick={this.handleOpen}
         >
           <Header>
+            <ClockIcon>
+              <svg viewBox="0 0 30 30">
+                <g color="grey" fill="currentcolor">
+                  <path d={icons.clockIcon} />
+                </g>
+              </svg>
+            </ClockIcon>
             {
             choice === null
               ? (time <= 12
