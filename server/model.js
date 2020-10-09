@@ -11,7 +11,7 @@ const getRestaurant = (id, cb) => {
   const q = `SELECT * FROM reservation WHERE restaurantId = (?)`;
 
   db.query(q, [id], cb);
-}
+};
 
 module.exports = {
   getData,

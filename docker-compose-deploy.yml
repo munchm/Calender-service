@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  app:
+    image: calendar-reservation_app:latest
+    ports:
+      - 80:3000
+    depends_on:
+      - 'mysql'
+    restart: on-failure
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_user: root
+      MYSQL_PASSWORD: theo
+      MYSQL_DB: calendar
+    command: sh -c 'npm start'
+
+  mysql:
+    image: calendar-reservation_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: theo
