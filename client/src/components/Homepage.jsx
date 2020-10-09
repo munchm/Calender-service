@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable object-shorthand */
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -97,7 +96,7 @@ class Homepage extends React.Component {
     // this.setState({
     //   restaurantData: response.data[0]
     // })
-    axios.get(`/api/calendar/${id}`)
+    return axios.get(`/api/calendar/${id}`)
       .then((response) => {
         this.setState({
           restaurantData: response.data[0],
@@ -114,16 +113,16 @@ class Homepage extends React.Component {
 
   async passReservationTimes(timesArray, chosenTime) {
     await this.setState({
-      timesArray: timesArray,
-      chosenTime: chosenTime,
+      timesArray,
+      chosenTime,
     });
   }
 
   async passCalendarDate(day, month, dayOfTheWeek) {
     await this.setState({
-      day: day,
-      month: month,
-      dayOfTheWeek: dayOfTheWeek,
+      day,
+      month,
+      dayOfTheWeek,
     });
     // console.log(this.state);
   }
