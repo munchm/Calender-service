@@ -34,7 +34,6 @@
 
 ## Success Status Code: 200
 
-///
 
 
 ## Related Projects
