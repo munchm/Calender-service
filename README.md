@@ -3,12 +3,13 @@
 > Project description
 
 >Server API
-> Get reservation info
-   - GET /api/calendar
+# Get reservation info
+   - GET `/api/calendar`
 
- ## Success Status Code: 200
+ ### Success Status Code `200`
 
- ## Returns: JSON
+ ### Returns: `JSON`
+
 ```sh
  {
       "restuarantId": "Number",
@@ -29,10 +30,33 @@
 }
 ```
 
-> Get reservation info for one restuarant
-   - GET /api/calendar/:id
+## Get reservation info for one restuarant
 
-## Success Status Code: 200
+ - GET `/api/calendar/:id`
+
+### Success Status Code `200`
+
+
+## Add info to reservation
+
+ - POST `/api/calendar`
+
+### Success Status Code `201`
+
+
+## Update reservation info
+
+ - PATCH `/api/calendar/:id`
+
+### Success Status Code `201`
+
+
+## DELETE info from reservation
+
+ - DELETE `/api/calendar/:id`
+
+### Success Status Code `200`
+
 
 
 
