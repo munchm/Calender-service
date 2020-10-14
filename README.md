@@ -3,6 +3,73 @@
 
 > Project description
 
+## Server API
+## Get reservation info
+   - GET `/api/calendar`
+
+ #### Success Status Code `200`
+
+ #### Returns: `JSON`
+
+
+```sh
+ {
+      "restuarantId": "Number",
+      "reservationDacte": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
+}
+```
+
+
+
+## Get reservation info for one restuarant
+
+ - GET `/api/calendar/:id`
+
+#### Success Status Code `200`
+
+
+
+
+## Add info to reservation
+
+ - POST `/api/calendar`
+
+#### Success Status Code `201`
+
+
+
+
+## Update reservation info
+
+ - PATCH `/api/calendar/:id`
+
+#### Success Status Code `201`
+
+
+
+
+## DELETE info from reservation
+
+ - DELETE `/api/calendar/:id`
+
+#### Success Status Code `200`
+
+
+
+
 ## Related Projects
 
   - https://github.com/teamName/repo
