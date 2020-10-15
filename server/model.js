@@ -35,7 +35,7 @@ const updateData = (id , data , cb) => {
   const q =`UPDATE reservation SET firstName = ?
   WHERE restaurantId = ? `
 
-  db.query(q, [id , firstName], cb);
+  db.query(q, [firstName , id ], cb);
 }
 
 module.exports = {
