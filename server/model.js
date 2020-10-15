@@ -13,7 +13,24 @@ const getRestaurant = (id, cb) => {
   db.query(q, [id], cb);
 };
 
+const postData = (data , cb) => {
+
+}
+
+const deleteData = (id , cb) => {
+
+}
+
+const updateData = (id , data , cb) => {
+
+}
+
 module.exports = {
   getData,
   getRestaurant,
+  postData,
+  deleteData,
+  updateData
+
+
 };
