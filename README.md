@@ -5,7 +5,9 @@
 
 ## Server API
 ## Get reservation info
-   - GET `/api/calendar`
+
+   - GET `/api/reservation`
+
 
  #### Success Status Code `200`
 
@@ -13,7 +15,10 @@
 
 
 ```sh
- {
+
+ [
+   {
+
       "restuarantId": "Number",
       "reservationDacte": “String”,
       "reservationMonth": “String”,
@@ -29,31 +34,51 @@
       "notes": “String”
       "openingTime": “Number”,
       "closingTime": “Number”
+
+
 }
+
+{
+  "restuarantId": "Number",
+      "reservationDacte": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
+
+}
+
+]
+
 ```
 
 
 
-## Get reservation info for one restuarant
 
- - GET `/api/calendar/:id`
+## Get reservation for one restuarant
+
+ - GET `/api/reservation/:id/restauraunt`
+
+ - :id `resturuant id`
 
 #### Success Status Code `200`
 
 
-
-
-## Add info to reservation
-
- - POST `/api/calendar`
-
-#### Success Status Code `201`
-
-#### Request body :
+ #### Returns: `JSON`
 
 
 ```sh
- {
+ [
+   {
       "restuarantId": "Number",
       "reservationDacte": “String”,
       "reservationMonth": “String”,
@@ -69,23 +94,82 @@
       "notes": “String”
       "openingTime": “Number”,
       "closingTime": “Number”
+
 }
+
+{
+  "restuarantId": "Number",
+      "reservationDacte": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
+
+}
+
+]
 ```
 
 
+
+
+## Add a resrvation for one resturuant
+
+ - POST `/api/eservation/:id/restaurant`
+ - :id `resturuant id`
+
+#### Success Status Code `201`
+
+#### Request body
+
+
+```sh
+
+   {
+      "restuarantId": "Number",
+      "reservationDacte": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
+
+}
+```
 
 
 
 ## Update reservation info
 
- - PATCH `/api/calendar/:id`
+ - PATCH `/reservation/:id/restaurant`
+ - :id `resturuant id`
 
 #### Success Status Code `201`
 
-#### Request body :
+
+#### Request body
+
 
 ```sh
-{
+
+   {
       "firstName": “String”,
       "lastName": “String”,
       "Email": “String” ,
@@ -95,12 +179,14 @@
 
 
 
-## DELETE info from reservation
 
- - DELETE `/api/calendar/:id`
 
-#### Success Status Code `200`
+## DELETE reservation from resturaunt
 
+ - DELETE `/api/reservation/:id/restaurant`
+ - :id `resturuant id`
+
+#### Success Status Code `204`
 
 
 
