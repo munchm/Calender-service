@@ -24,8 +24,7 @@ const getRestaurant = (req, res) => {
 
 const postReservation = (req, res) => {
   const data = req.body;
-
-  modelHandler.postData(data, (err,data) => {
+  modelHandler.postReservation(data , (err,data) => {
     if (err) {
       res.status(400).send();
     } else {
@@ -39,11 +38,11 @@ const postReservation = (req, res) => {
 const deleteReservation = (req, res) => {
   const id = req.params.id;
 
-  modelHandler.deleteData(id, (err,data) => {
+  modelHandler.deleteReservation(id, (err,data) => {
     if (err) {
       res.status(400).send();
     } else {
-      res.status(200).send();
+      res.status(204).send();
     }
   })
 
