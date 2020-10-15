@@ -29,7 +29,7 @@ const deleteReservation = (id , cb) => {
   db.query(q, [id], cb);
 }
 
-const updateData== = (id , data , cb) => {
+const updateData = (id , data , cb) => {
   const firstName = data.firstName ;
 
   const q =`UPDATE reservation SET firstName = ?

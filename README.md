@@ -1,10 +1,13 @@
+
 # Project Name
 
 > Project description
 
 ## Server API
 ## Get reservation info
+
    - GET `/api/reservation`
+
 
  #### Success Status Code `200`
 
@@ -12,8 +15,10 @@
 
 
 ```sh
+
  [
    {
+
       "restuarantId": "Number",
       "reservationDacte": “String”,
       "reservationMonth": “String”,
@@ -29,6 +34,7 @@
       "notes": “String”
       "openingTime": “Number”,
       "closingTime": “Number”
+
 
 }
 
@@ -52,7 +58,9 @@
 }
 
 ]
+
 ```
+
 
 
 
@@ -66,8 +74,6 @@
 
 
  #### Returns: `JSON`
-
-
 
 
 ```sh
@@ -150,7 +156,6 @@
 
 
 
-
 ## Update reservation info
 
  - PATCH `/reservation/:id/restaurant`
@@ -175,13 +180,13 @@
 
 
 
+
 ## DELETE reservation from resturaunt
 
  - DELETE `/api/reservation/:id/restaurant`
  - :id `resturuant id`
 
 #### Success Status Code `204`
-
 
 
 
