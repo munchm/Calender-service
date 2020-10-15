@@ -48,6 +48,30 @@
 
 #### Success Status Code `201`
 
+#### Request body :
+
+
+```sh
+ {
+      "restuarantId": "Number",
+      "reservationDacte": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
+}
+```
+
+
 
 
 
@@ -57,6 +81,16 @@
 
 #### Success Status Code `201`
 
+#### Request body :
+
+```sh
+{
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+}
+```
 
 
 
