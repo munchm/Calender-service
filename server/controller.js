@@ -22,7 +22,7 @@ const getRestaurant = (req, res) => {
   });
 };
 
-const postData = (req, res) => {
+const postReservation = (req, res) => {
   const data = req.body;
 
   modelHandler.postData(data, (err,data) => {
@@ -36,7 +36,7 @@ const postData = (req, res) => {
 }
 
 
-const deleteData = (req, res) => {
+const deleteReservation = (req, res) => {
   const id = req.params.id;
 
   modelHandler.deleteData(id, (err,data) => {
@@ -66,7 +66,7 @@ const updateData = (req, res) => {
 module.exports = {
   getData,
   getRestaurant,
-  postData,
-  deleteData,
+  postReservation,
+  deleteReservation,
   updateData,
 };

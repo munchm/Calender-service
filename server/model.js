@@ -13,7 +13,7 @@ const getRestaurant = (id, cb) => {
   db.query(q, [id], cb);
 };
 
-const postData = (data , cb) => {
+const postReservation  = (data , cb) => {
 
   const {restaurantId , reservationDate , reservationMonth, reservationDay,reservationTimes, currentYear,  available, people, firstName, lastName , email,phoneNumber, notes, openingTime, closingTime } = data;
 
@@ -23,13 +23,13 @@ const postData = (data , cb) => {
 
 }
 
-const deleteData = (id , cb) => {
+const deleteReservation = (id , cb) => {
 
   const q = `DELETE FROM reservation WHERE restaurantId = ? `
   db.query(q, [id], cb);
 }
 
-const updateData = (id , data , cb) => {
+const updateData== = (id , data , cb) => {
   const firstName = data.firstName ;
 
   const q =`UPDATE reservation SET firstName = ?
@@ -41,8 +41,8 @@ const updateData = (id , data , cb) => {
 module.exports = {
   getData,
   getRestaurant,
-  postData,
-  deleteData,
+  postReservation,
+  deleteReservation,
   updateData
 
 

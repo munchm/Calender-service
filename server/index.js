@@ -17,9 +17,9 @@ app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/api/calendar', controllerHandler.getData);
 app.get('/api/calendar/:id', controllerHandler.getRestaurant);
-app.post('/api/calendar', controllerHandler.postData);
+app.post('/api/calendar', controllerHandler.postReservation);
 app.patch('/api/calendar/:id', controllerHandler.updateData);
-app.delete('/api/calendar/:id', controllerHandler.deleteData);
+app.delete('/api/calendar/:id', controllerHandler.deleteReservation);
 
 
 
