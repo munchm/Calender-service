@@ -18,15 +18,16 @@
 
  [
    {
-
-      "restuarantId": "Number",
-      "reservationDacte": “String”,
+      "reservationId : "Number",
+      "restaurantId": "Number",
+      "reservationDate": “String”,
       "reservationMonth": “String”,
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
       "Available": “Boolean”,
       "People": “String”,
+      "userId" :"Number",
       "firstName": “String”,
       "lastName": “String”,
       "Email": “String” ,
@@ -39,14 +40,16 @@
 }
 
 {
-  "restuarantId": "Number",
-      "reservationDacte": “String”,
+      "reservationId : "Number",
+      "restaurantId": "Number",
+      "reservationDate": “String”,
       "reservationMonth": “String”,
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
       "Available": “Boolean”,
       "People": “String”,
+      "userId" :"Number",
       "firstName": “String”,
       "lastName": “String”,
       "Email": “String” ,
@@ -66,9 +69,9 @@
 
 ## Get reservation for one restuarant
 
- - GET `/api/reservation/:id/restauraunt`
+ - GET `/api/reservation/restaurant/:id`
 
- - :id `resturuant id`
+ - :id `restaurant id`
 
 #### Success Status Code `200`
 
@@ -79,14 +82,16 @@
 ```sh
  [
    {
-      "restuarantId": "Number",
-      "reservationDacte": “String”,
+      "reservationId : "Number",
+      "restaurantId": "Number",
+      "reservationDate": “String”,
       "reservationMonth": “String”,
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
       "Available": “Boolean”,
       "People": “String”,
+      "userId" :"Number"
       "firstName": “String”,
       "lastName": “String”,
       "Email": “String” ,
@@ -98,14 +103,16 @@
 }
 
 {
-  "restuarantId": "Number",
-      "reservationDacte": “String”,
+      "reservationId : "Number",
+      "restuarantId": "Number",
+      "reservationDate": “String”,
       "reservationMonth": “String”,
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
       "Available": “Boolean”,
       "People": “String”,
+      "userId" :"Number"
       "firstName": “String”,
       "lastName": “String”,
       "Email": “String” ,
@@ -124,7 +131,7 @@
 
 ## Add a resrvation for one resturuant
 
- - POST `/api/eservation/:id/restaurant`
+ - POST `/api/reservation/restaurant/:id`
  - :id `resturuant id`
 
 #### Success Status Code `201`
@@ -135,14 +142,16 @@
 ```sh
 
    {
-      "restuarantId": "Number",
-      "reservationDacte": “String”,
+      "reservationId : "Number",
+      "restaurantId": "Number",
+      "reservationDate": “String”,
       "reservationMonth": “String”,
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
       "Available": “Boolean”,
       "People": “String”,
+      "userId" :"Number",
       "firstName": “String”,
       "lastName": “String”,
       "Email": “String” ,
@@ -158,8 +167,8 @@
 
 ## Update reservation info
 
- - PATCH `/reservation/:id/restaurant`
- - :id `resturuant id`
+ - PATCH `/reservation/restaurant/:id`
+ - :id `restaurant id`
 
 #### Success Status Code `201`
 
@@ -170,10 +179,23 @@
 ```sh
 
    {
+      "reservationId : "Number",
+      "restaurantId": "Number",
+      "reservationDate": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "userId" :"Number",
       "firstName": “String”,
       "lastName": “String”,
       "Email": “String” ,
       "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
 }
 ```
 
@@ -183,8 +205,8 @@
 
 ## DELETE reservation from resturaunt
 
- - DELETE `/api/reservation/:id/restaurant`
- - :id `resturuant id`
+ - DELETE `/api/reservation/restaurant/:id`
+ - :id `restaurant id`
 
 #### Success Status Code `204`
 
