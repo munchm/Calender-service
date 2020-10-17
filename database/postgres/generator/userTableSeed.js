@@ -7,6 +7,8 @@ const faker = require('faker');
 
 
 
+
+
 const seed = async () => {
   const createReviewTableCSV = async () => {
     writer.pipe(fs.createWriteStream('UsrTable.csv'));
@@ -23,6 +25,8 @@ const seed = async () => {
     console.log('The data generated');
   }
   await createReviewTableCSV();
+
+
 
 }
 

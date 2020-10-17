@@ -13,6 +13,8 @@
     "react-dev": "webpack -d --watch",
     "build-d": "wepback --mode=development",
     "build-p": "webpack --mode=production",
+    "postgres-seed": "psql postgres < ./database/postgres/seed.sql" ,
+    "postgres-generate" : "node --max-old-space-size=7680 database/postgres/generator",
     "seed": "node database/seed.js",
     "test": "jest",
     "jest-coverage": "jest --coverage --colors"
@@ -30,6 +32,7 @@
     "http-proxy": "^1.18.1",
     "jquery": "^2.2.4",
     "lodash": "^4.6.1",
+    "mongoose": "^5.10.9",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
