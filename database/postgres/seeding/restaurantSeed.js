@@ -10,11 +10,8 @@ const seed = async () => {
   const createReviewTableCSV = async () => {
     writer.pipe(fs.createWriteStream('restaurantTable.csv'));
     for (var i = 0; i < 1000000; i++) {
-
-      for (var j = 0; j < ( 4 + Math.floor(Math.random() * 4)); j++) {
-
         writer.write({
-          restaurantId : j+1,
+          restaurantId : i+1,
           openingTime : faker.random.number({
             min: 9,
             max: 13,
@@ -25,7 +22,6 @@ const seed = async () => {
             max: 23,
           }),
         });
-      }
     }
     writer.end();
     console.log('The data generated');
