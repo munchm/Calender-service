@@ -5,15 +5,6 @@ const faker = require('faker');
 
 
 let  currentYear = 2020;
-const month1 =faker.random.number({
-  min: 1,
-  max: 12,
-})
-
-const day1 = faker.random.number({
-  min: 9,
-  max: 23,
-})
 
 const seed = async () => {
   const createReviewTableCSV = async () => {
@@ -23,6 +14,20 @@ const seed = async () => {
         writer.write({
 
           reservationID : i+1,
+          people :faker.random.number({
+            min: 1,
+            max: 6,
+          }),
+          reservationDate : (faker.date.month(),faker.date.weekday()),
+          reservationMonth : faker.date.month(),
+          reservationDay : faker.date.weekday(),
+          reservationTimes : faker.random.number({
+            min: 9,
+            max: 23,
+          }),
+          currentYear : currentYear,
+          available: faker.random.boolean(),
+          notes: faker.company.catchPhraseNoun(),
           restaurantId :faker.random.number({
             min: 1,
             max: 1000000,
@@ -31,20 +36,6 @@ const seed = async () => {
             min: 1,
             max: 1000000,
           }),
-          currentYear : currentYear,
-          available: faker.random.boolean(),
-          notes: faker.company.catchPhraseNoun(),
-
-          reservationDay : faker.date.weekday(),
-          reservationMonth : faker.date.month(),
-          reservationTimes : faker.random.number({
-                min: 9,
-                max: 23,
-              }),
-          people :faker.random.number({
-                min: 1,
-                max: 6,
-              }),
 
         });
     }
