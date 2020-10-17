@@ -5,15 +5,6 @@ const faker = require('faker');
 
 
 let  currentYear = 2020;
-const month1 =faker.random.number({
-  min: 1,
-  max: 12,
-})
-
-const day1 = faker.random.number({
-  min: 9,
-  max: 23,
-})
 const seed = async () => {
   const createReviewTableCSV = async () => {
     writer.pipe(fs.createWriteStream('ReservationMongooseTable.csv'));
@@ -33,7 +24,7 @@ const seed = async () => {
           currentYear : currentYear,
           available: faker.random.boolean(),
           notes: faker.company.catchPhraseNoun(),
-
+          reservationDay : (faker.date.month(),faker.date.weekday()),
           reservationDay : faker.date.weekday(),
           reservationMonth : faker.date.month(),
           reservationTimes : faker.random.number({
