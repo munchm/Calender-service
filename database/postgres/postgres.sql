@@ -23,6 +23,7 @@ CREATE TABLE restaurant (
 
 DROP TABLE IF EXISTS reservation;
 CREATE TABLE reservation (
+  reservationId INT PRIMARY KEY NOT NULL,
   people VARCHAR,
   reservationDate VARCHAR,
   reservationMonth VARCHAR,

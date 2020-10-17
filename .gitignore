@@ -26,3 +26,5 @@ bundle.js
 
 .env
 docker-compose-build.yml
+
+*.csv

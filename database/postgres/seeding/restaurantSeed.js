@@ -8,8 +8,8 @@ const faker = require('faker');
 
 const seed = async () => {
   const createReviewTableCSV = async () => {
-    writer.pipe(fs.createWriteStream('Example2.csv'));
-    for (var i = 0; i < 100; i++) {
+    writer.pipe(fs.createWriteStream('restaurantTable.csv'));
+    for (var i = 0; i < 1000000; i++) {
 
       for (var j = 0; j < ( 4 + Math.floor(Math.random() * 4)); j++) {
 
@@ -28,7 +28,7 @@ const seed = async () => {
       }
     }
     writer.end();
-    console.log('CSV Generated');
+    console.log('The data generated');
   }
 
   await createReviewTableCSV();
