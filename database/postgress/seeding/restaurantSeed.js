@@ -1,88 +1,38 @@
 const fs = require('fs');
+const csvWriter = require('csv-write-stream');
+let writer = csvWriter();
 const faker = require('faker');
-const writeStream = fs.createWriteStream('reservation.csv');
-const count = 100;
-
-// const db = require('./connection.js');
-// const schema = require('./mongooseSchema.js');
 
 
-const packageReservation = (i) => {
-  const restuarantId = i + 1;
-  const currentYear = 2020;
-  const month = new Array(10).fill(null).map(number =>
-    number = faker.random.number({
-      min: 1,
-      max: 12,
-    })
-  );
-  const day = new Array(10).fill(null).map(day =>
-    day = faker.random.number({
-      min: 9,
-      max: 23,
-    })
-  );
 
-  const reservationDate = new Array(month, day);
-  const reservationDay = new Array(day);
-  const reservationMonth = new Array(month);
 
-  const reservationTimes = new Array(10).fill(null).map(time =>
-    time = faker.random.number({
-      min: 9,
-      max: 23,
-    })
-  );
+const seed = async () => {
+  const createReviewTableCSV = async () => {
+    writer.pipe(fs.createWriteStream('Example2.csv'));
+    for (var i = 0; i < 100; i++) {
 
-  const reservationTime = faker.random.number({
-    min: 9,
-    max: 23,
-  });
+      for (var j = 0; j < ( 4 + Math.floor(Math.random() * 4)); j++) {
 
-  const openingTime = faker.random.number({
-    min: 9,
-    max: 13,
-  });
+        writer.write({
+          restaurantId : j+1,
+          openingTime : faker.random.number({
+            min: 9,
+            max: 13,
+          }),
 
-  const closingTime = faker.random.number({
-    min: 20,
-    max: 23,
-  });
-
-  const people = new Array(10).fill(null).map(ppl =>
-    ppl = faker.random.number({
-      min: 1,
-      max: 6,
-    })
-  );
-
-  const restaurantReservation = reservationTimes.forEach(people => {
-    people = faker.random.number({
-      min: 1,
-      max: 6,
-    });
-  });
-
-  const available = faker.random.boolean();
-  const firstName = faker.name.firstName();
-  const lastName = faker.name.lastName();
-  const email = faker.internet.email();
-  const phoneNumber = faker.phone.phoneNumberFormat();
-  const notes = faker.company.catchPhraseNoun();
-
-   return `${ restuarantId }, ${currentYear}, ${reservationDate}, ${reservationDay } ,${reservationMonth },${reservationTimes},${openingTimes},${closingTime},${people},${available},${firstName},${lastName},${email},${phoneNumber},${notes}`
-
-};
-
-(async() => {
-  for (let i = 0; i < count; i += 1) {
-    const reservationForThisProperty = 2 + Math.floor(Math.random() * 2);
-    for (let j = 0; j < reservationForThisProperty; j += 1){
-      const reservation = packageReview(i);
-      if (!stream.write(reservation)) {
-        await new Promise(resolve => stream.once('drain', resolve));
+          closingTime : faker.random.number({
+            min: 20,
+            max: 23,
+          }),
+        });
       }
     }
+    writer.end();
+    console.log('CSV Generated');
   }
-})();
 
+  await createReviewTableCSV();
+
+}
+
+seed();
