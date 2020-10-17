@@ -47,12 +47,12 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
-      "People": “String”,
+      "available": “Boolean”,
+      "people": “String”,
       "userId" :"Number",
       "firstName": “String”,
       "lastName": “String”,
-      "Email": “String” ,
+      "email": “String” ,
       "phoneNumber":”String”,
       "notes": “String”
       "openingTime": “Number”,
@@ -67,7 +67,7 @@
 
 
 
-## Get reservation for one restuarant
+## Get reservation for one restaurant
 
  - GET `/api/reservation/restaurant/:id`
 
@@ -89,12 +89,12 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
-      "People": “String”,
+      "available": “Boolean”,
+      "people": “String”,
       "userId" :"Number"
       "firstName": “String”,
       "lastName": “String”,
-      "Email": “String” ,
+      "email": “String” ,
       "phoneNumber":”String”,
       "notes": “String”
       "openingTime": “Number”,
@@ -110,12 +110,12 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
-      "People": “String”,
+      "available": “Boolean”,
+      "people": “String”,
       "userId" :"Number"
       "firstName": “String”,
       "lastName": “String”,
-      "Email": “String” ,
+      "email": “String” ,
       "phoneNumber":”String”,
       "notes": “String”
       "openingTime": “Number”,
@@ -129,10 +129,10 @@
 
 
 
-## Add a resrvation for one resturuant
+## Add a resrvation for one restaurant
 
- - POST `/api/reservation/restaurant/:id`
- - :id `resturuant id`
+ - POST `/api/reservation`
+
 
 #### Success Status Code `201`
 
@@ -149,12 +149,12 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
-      "People": “String”,
+      "available": “Boolean”,
+      "people": “String”,
       "userId" :"Number",
       "firstName": “String”,
       "lastName": “String”,
-      "Email": “String” ,
+      "email": “String” ,
       "phoneNumber":”String”,
       "notes": “String”
       "openingTime": “Number”,
@@ -167,8 +167,8 @@
 
 ## Update reservation info
 
- - PATCH `/reservation/restaurant/:id`
- - :id `restaurant id`
+ - PATCH `/reservation/:id`
+ - :id `reservation id`
 
 #### Success Status Code `201`
 
@@ -186,12 +186,12 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
-      "People": “String”,
+      "available": “Boolean”,
+      "people": “String”,
       "userId" :"Number",
       "firstName": “String”,
       "lastName": “String”,
-      "Email": “String” ,
+      "email": “String” ,
       "phoneNumber":”String”,
       "notes": “String”
       "openingTime": “Number”,
@@ -203,10 +203,10 @@
 
 
 
-## DELETE reservation from resturaunt
+## DELETE reservation from restaurunt
 
- - DELETE `/api/reservation/restaurant/:id`
- - :id `restaurant id`
+ - DELETE `/api/reservation/:id`
+ - :id `reservation id`
 
 #### Success Status Code `204`
 
