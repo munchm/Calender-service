@@ -1,6 +1,7 @@
 // const mysql = require('mysql');
 // //const mySQL = require('../.env/config.js');
 
+
 // const connection = mysql.createConnection({
 //   host: '',
 //   user: '',

@@ -96,7 +96,7 @@ class Homepage extends React.Component {
     // this.setState({
     //   restaurantData: response.data[0]
     // })
-    return axios.get(`/api/calendar/${id}`)
+    return axios.get(`/api/reservation/${id}/restauraunt`)
       .then((response) => {
         this.setState({
           restaurantData: response.data[0],
