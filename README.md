@@ -1,24 +1,194 @@
+
 # Project Name
 
 > Project description
 
->Server API
-> Get reservation info
-   - GET /api/calendar
+## Server API
+## Get reservation info
 
- ## Success Status Code: 200
+   - GET `/api/reservation`
 
- ## Returns: JSON
+
+ #### Success Status Code `200`
+
+ #### Returns: `JSON`
+
+
 ```sh
- {
-      "restuarantId": "Number",
-      "reservationDacte": “String”,
+
+ [
+   {
+      "reservationId : "Number",
+      "restaurantId": "Number",
+      "reservationDate": “String”,
       "reservationMonth": “String”,
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
       "Available": “Boolean”,
       "People": “String”,
+      "userId" :"Number",
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
+
+
+}
+
+{
+      "reservationId : "Number",
+      "restaurantId": "Number",
+      "reservationDate": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "userId" :"Number",
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
+
+}
+
+]
+
+```
+
+
+
+
+## Get reservation for one restuarant
+
+ - GET `/api/reservation/restaurant/:id`
+
+ - :id `restaurant id`
+
+#### Success Status Code `200`
+
+
+ #### Returns: `JSON`
+
+
+```sh
+ [
+   {
+      "reservationId : "Number",
+      "restaurantId": "Number",
+      "reservationDate": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "userId" :"Number"
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
+
+}
+
+{
+      "reservationId : "Number",
+      "restuarantId": "Number",
+      "reservationDate": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "userId" :"Number"
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
+
+}
+
+]
+```
+
+
+
+
+## Add a resrvation for one resturuant
+
+ - POST `/api/reservation/restaurant/:id`
+ - :id `resturuant id`
+
+#### Success Status Code `201`
+
+#### Request body
+
+
+```sh
+
+   {
+      "reservationId : "Number",
+      "restaurantId": "Number",
+      "reservationDate": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "userId" :"Number",
+      "firstName": “String”,
+      "lastName": “String”,
+      "Email": “String” ,
+      "phoneNumber":”String”,
+      "notes": “String”
+      "openingTime": “Number”,
+      "closingTime": “Number”
+
+}
+```
+
+
+
+## Update reservation info
+
+ - PATCH `/reservation/restaurant/:id`
+ - :id `restaurant id`
+
+#### Success Status Code `201`
+
+
+#### Request body
+
+
+```sh
+
+   {
+      "reservationId : "Number",
+      "restaurantId": "Number",
+      "reservationDate": “String”,
+      "reservationMonth": “String”,
+      "reservationDay": “String”
+      "reservationTimes": “String”,
+      "currentYear": “String”,
+      "Available": “Boolean”,
+      "People": “String”,
+      "userId" :"Number",
       "firstName": “String”,
       "lastName": “String”,
       "Email": “String” ,
@@ -29,12 +199,17 @@
 }
 ```
 
-> Get reservation info for one restuarant
-   - GET /api/calendar/:id
 
-## Success Status Code: 200
 
-///
+
+
+## DELETE reservation from resturaunt
+
+ - DELETE `/api/reservation/restaurant/:id`
+ - :id `restaurant id`
+
+#### Success Status Code `204`
+
 
 
 ## Related Projects
