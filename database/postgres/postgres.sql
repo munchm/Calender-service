@@ -6,7 +6,7 @@ CREATE DATABASE calendar;
 \c calendar;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
-    usrId INT PRIMARY KEY NOT NULL,
+    usrId SERIAL  PRIMARY KEY ,
     firstName VARCHAR ,
     lastName VARCHAR,
     email VARCHAR,
@@ -15,7 +15,7 @@ CREATE TABLE users (
 
 DROP TABLE IF EXISTS restaurant;
 CREATE TABLE restaurant (
-  restaurantId INT PRIMARY KEY NOT NULL,
+  restaurantId SERIAL PRIMARY KEY,
   openingTime INTEGER,
   closingTime INTEGER
 
@@ -23,7 +23,7 @@ CREATE TABLE restaurant (
 
 DROP TABLE IF EXISTS reservation;
 CREATE TABLE reservation (
-  reservationId INT PRIMARY KEY NOT NULL,
+  reservationId SERIAL PRIMARY KEY ,
   people VARCHAR,
   reservationDate VARCHAR,
   reservationMonth VARCHAR,
