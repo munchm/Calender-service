@@ -42,10 +42,10 @@ const filename = 'Users.csv';
 const stream = fs.createWriteStream(filename);
 
 const packageUser = (i) => {
-          const firstName = faker.name.firstName();
-          const lastName = faker.name.lastName();
-          const email=  faker.internet.email();
-          const phoneNumber = faker.phone.phoneNumberFormat();
+    const firstName = faker.name.firstName();
+    const lastName = faker.name.lastName();
+    const email=  faker.internet.email();
+    const phoneNumber = faker.phone.phoneNumberFormat();
   return `${firstName},${lastName},${email},${phoneNumber}\n`;
 };
 

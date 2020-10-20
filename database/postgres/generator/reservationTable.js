@@ -60,20 +60,20 @@ const stream = fs.createWriteStream(filename);
 
 
 const packageReservation = (i) => {
-      const  people  =faker.random.number({
+    const  people  =faker.random.number({
         min: 1,
         max: 6,
       });
     const reservationDate = (faker.date.month(),faker.date.weekday());
     const reservationMonth = faker.date.month();
     const reservationDay = faker.date.weekday();
-      const reservationTimes = faker.random.number({
+    const reservationTimes = faker.random.number({
         min: 9,
         max: 23,
       });
-      const currentYear = 2020;
-      const available =  faker.random.boolean();
-      const notes=  faker.company.catchPhraseNoun();
+    const currentYear = 2020;
+    const available =  faker.random.boolean();
+    const notes=  faker.company.catchPhraseNoun();
     const restaurantId = faker.random.number({
         min: 1,
         max: 1000000,

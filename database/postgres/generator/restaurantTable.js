@@ -43,15 +43,15 @@ const stream = fs.createWriteStream(filename);
 
 const packageRestaurant = (i) => {
 
-            const openingTime = faker.random.number({
-              min: 9,
-              max: 13,
-            });
+    const openingTime = faker.random.number({
+      min: 9,
+      max: 13,
+    });
 
-            const closingTime = faker.random.number({
-              min: 20,
-              max: 23,
-            });
+    const closingTime = faker.random.number({
+      min: 20,
+      max: 23,
+    });
   return `${openingTime},${closingTime}\n`;
 };
 
