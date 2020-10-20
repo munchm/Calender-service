@@ -6,32 +6,32 @@ CREATE DATABASE calendar;
 \c calendar;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
-    usrId INT PRIMARY KEY NOT NULL,
-    firstName VARCHAR ,
-    lastName VARCHAR,
-    email VARCHAR,
-    phoneNumber VARCHAR
+    usrId SERIAL  PRIMARY KEY ,
+    firstName VARCHAR(20) ,
+    lastName VARCHAR(20),
+    email VARCHAR(50),
+    phoneNumber VARCHAR(20)
 );
 
 DROP TABLE IF EXISTS restaurant;
 CREATE TABLE restaurant (
-  restaurantId INT PRIMARY KEY NOT NULL,
-  openingTime INTEGER,
-  closingTime INTEGER
+  restaurantId SERIAL  PRIMARY KEY,
+  openingTime SMALLINT ,
+  closingTime SMALLINT
 
 );
 
 DROP TABLE IF EXISTS reservation;
 CREATE TABLE reservation (
-  reservationId INT PRIMARY KEY NOT NULL,
-  people VARCHAR,
-  reservationDate VARCHAR,
-  reservationMonth VARCHAR,
-  reservationDay VARCHAR,
-  reservationTimes VARCHAR,
-  currentYear VARCHAR,
+  reservationId SERIAL  PRIMARY KEY ,
+  people VARCHAR(20),
+  reservationDate VARCHAR(20),
+  reservationMonth VARCHAR(15),
+  reservationDay VARCHAR(15),
+  reservationTimes VARCHAR(10),
+  currentYear VARCHAR(8),
   available Boolean,
-  notes VARCHAR,
+  notes VARCHAR(25),
   restaurantId INTEGER references restaurant(restaurantId),
   usrId INTEGER references users(usrId)
 
