@@ -1,21 +1,14 @@
 const mongoose = require('mongoose');
 
-const connectionStr = 'mongodb://localhost/reservation';
+const mongoURI = 'mongodb://localhost:27017/reservation';
 
-mongoose.connect(connectionStr, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
-});
+const db = mongoose.connect(mongoURI, { useNewUrlParser: true });
 
-const { connection } = mongoose;
+db
+  .then(db => console.log(`Connected to: ${mongoURI}`))
+  .catch(err => {
+    console.log(`There was a problem connecting to mongo at: ${mongoURI}`);
+    console.log(err);
+  });
 
-
-connection.on('error', console.error.bind(console, 'connection error:'));
-connection.once('open', () => {
-
-  console.log(`MongoDB database connection established successfully at ${connectionStr}`);
-});
-
-module.exports = connection;
+module.exports = db;

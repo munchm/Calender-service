@@ -109,7 +109,7 @@ const packageReservation = (i) => {
   const email = faker.internet.email();
   const phoneNumber = faker.phone.phoneNumberFormat();
 
-  return `${openingTime},${closingTime}\n`;
+  return `${reservationID},${restaurantId},${usrId},${currentYear},${available},${notes},${reservationDate},${reservationDay},${reservationMonth},${reservationTimes},${people},${openingTime},${closingTime},${firstName},${lastName},${email},${phoneNumber}\n`;
 };
 
 (async() => {
