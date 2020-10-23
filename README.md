@@ -127,8 +127,7 @@
 
 ## Add a resrvation for one resturuant
 
- - POST `/api/reservation/restaurant/:id`
- - :id `resturuant id`
+ - POST `/api/reservation/restaurant`
 
 #### Success Status Code `201`
 
