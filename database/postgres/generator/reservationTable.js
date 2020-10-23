@@ -53,49 +53,47 @@
 const faker = require('faker');
 const fs = require('fs');
 
-const ReservationCount = 10000000;
+const ReservationCount = 70000000;
 const filename = 'Reservation.csv';
 const stream = fs.createWriteStream(filename);
 
-
-
 const packageReservation = (i) => {
-    const  people  =faker.random.number({
-        min: 1,
-        max: 6,
-      });
-    const reservationDate = (faker.date.month(),faker.date.weekday());
-    const reservationMonth = faker.date.month();
-    const reservationDay = faker.date.weekday();
-    const reservationTimes = faker.random.number({
-        min: 9,
-        max: 23,
-      });
-    const currentYear = 2020;
-    const available =  faker.random.boolean();
-    const notes=  faker.company.catchPhraseNoun();
-    const restaurantId = faker.random.number({
-        min: 1,
-        max: 1000000,
-      });
-    const usrId = faker.random.number({
-        min: 1,
-        max: 1000000,
-      });
+  const day = faker.random.number({
+    min: 1,
+    max: 30,
+  });
+  const people = faker.random.number({
+    min: 1,
+    max: 6,
+  });
+  const reservationMonth = faker.date.month();
+  const reservationDay = faker.date.weekday();
+  const reservationTime = faker.random.number({
+    min: 9,
+    max: 23,
+  });
+  const currentYear = 2020;
+  const reservationDate = `${reservationDay}-${reservationMonth}-${day}-${currentYear}`;
+  const notes = faker.company.catchPhraseNoun();
+  const restaurantId = faker.random.number({
+    min: 1,
+    max: 10000000,
+  });
+  const usrId = faker.random.number({
+    min: 1,
+    max: 5000000,
+  });
 
-  return `${people},${reservationDate},${reservationMonth},${reservationDay},${reservationTimes},${currentYear},${available},${notes},${restaurantId},${usrId}\n`;
+  return `${people},${reservationDate},${reservationMonth},${reservationDay},${reservationTime},${currentYear},${notes},${restaurantId},${usrId}\n`;
 };
 
-(async() => {
+(async () => {
   for (let i = 0; i <= ReservationCount; i += 1) {
-      const Reservation = packageReservation(i);
-      if (!stream.write(Reservation)) {
-        await new Promise(resolve => stream.once('drain', resolve));
+    const Reservation = packageReservation(i);
+    if (!stream.write(Reservation)) {
+      await new Promise(resolve => stream.once('drain', resolve));
 
     }
-    console.log(`generated ${i}`);
-  }
-
-
+}
 })();
-
+console.log(`generated`);

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-;
 
 const reservationSchema = mongoose.Schema({
   restaurantId :Number,
@@ -8,12 +7,11 @@ const reservationSchema = mongoose.Schema({
   openingTime: Number,
   closingTime: Number,
   reservationID : Number
-  reservationDate: String,
   reservationMonth: String,
   reservationDay: String,
   reservationTimes: String,
   currentYear: String,
-  available: Boolean,
+  reservationDate: String,
   notes: String,
   userId : Number,
   firstName: String,

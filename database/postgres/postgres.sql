@@ -23,18 +23,17 @@ CREATE TABLE restaurant (
 
 DROP TABLE IF EXISTS reservation;
 CREATE TABLE reservation (
-  reservationId SERIAL  PRIMARY KEY ,
-  people VARCHAR(20),
-  reservationDate VARCHAR(20),
+  reservationId SERIAL PRIMARY KEY ,
+  people SMALLINT,
+  reservationDate VARCHAR(50),
   reservationMonth VARCHAR(15),
   reservationDay VARCHAR(15),
-  reservationTimes VARCHAR(10),
+  reservationTime VARCHAR(10),
   currentYear VARCHAR(8),
-  available Boolean,
   notes VARCHAR(25),
   restaurantId INTEGER references restaurant(restaurantId),
   usrId INTEGER references users(usrId)
-
+  -- UNIQUE  (reservationTime ,reservationDate, restaurantId)
 );
 
 
