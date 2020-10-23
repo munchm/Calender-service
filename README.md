@@ -25,7 +25,6 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
       "People": “String”,
       "userId" :"Number",
       "firstName": “String”,
@@ -47,7 +46,6 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
       "People": “String”,
       "userId" :"Number",
       "firstName": “String”,
@@ -89,7 +87,6 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
       "People": “String”,
       "userId" :"Number"
       "firstName": “String”,
@@ -110,7 +107,6 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
       "People": “String”,
       "userId" :"Number"
       "firstName": “String”,
@@ -149,7 +145,6 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
       "People": “String”,
       "userId" :"Number",
       "firstName": “String”,
@@ -186,7 +181,6 @@
       "reservationDay": “String”
       "reservationTimes": “String”,
       "currentYear": “String”,
-      "Available": “Boolean”,
       "People": “String”,
       "userId" :"Number",
       "firstName": “String”,
