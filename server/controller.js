@@ -11,7 +11,7 @@ const getData = (req, res) => {
 };
 
 const getRestaurant = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
 
   modelHandler.getRestaurant(id, (err, data) => {
     if (err) {
@@ -23,44 +23,41 @@ const getRestaurant = (req, res) => {
 };
 
 const postReservation = (req, res) => {
-  const data = req.body;
-  modelHandler.postReservation(data , (err,data) => {
+  const reservation = req.body;
+  console.log(reservation);
+  modelHandler.postReservation(reservation, (err) => {
     if (err) {
       res.status(400).send();
     } else {
       res.status(201).send();
     }
-  })
-
-}
-
+  });
+};
 
 const deleteReservation = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
 
-  modelHandler.deleteReservation(id, (err,data) => {
+  modelHandler.deleteReservation(id, (err) => {
     if (err) {
       res.status(400).send();
     } else {
       res.status(204).send();
     }
-  })
-
-}
+  });
+};
 
 const updateData = (req, res) => {
-  const id = req.params.id;
-  const data = req.body ;
+  const { id } = req.params;
+  const data = req.body;
 
-  modelHandler.updateData(id, data, (err,data) => {
+  modelHandler.updateData(id, data, (err) => {
     if (err) {
       res.status(400).send();
     } else {
       res.status(200).send();
     }
-  })
-}
-
+  });
+};
 
 module.exports = {
   getData,

@@ -16,13 +16,10 @@ app.use('/', express.static(path.join(__dirname, '../client/dist')));
 // app.delete('/calendar/year/:{month}-:{day}-:{time}', controllerHandler.deleteReservation());
 
 app.get('/api/reservation', controllerHandler.getData);
-app.get('/api/reservation/:id/restauraunt', controllerHandler.getRestaurant);
-app.post('/api/reservation/restauraunt', controllerHandler.postReservation);
-app.patch('/api/reservation/:id/restauraunt', controllerHandler.updateData);
-app.delete('/api/reservation/:id/restauraunt', controllerHandler.deleteReservation);
-
-
-
+app.get('/api/reservation/restaurant/:id', controllerHandler.getRestaurant);
+app.post('/api/reservation/restaurant', controllerHandler.postReservation);
+app.patch('/api/reservation/restaurant/:id', controllerHandler.updateData);
+app.delete('/api/reservation/restaurant/:id', controllerHandler.deleteReservation);
 
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
