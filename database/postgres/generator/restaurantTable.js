@@ -37,32 +37,33 @@
 const faker = require('faker');
 const fs = require('fs');
 
-const restaurantCount = 1000000;
+const restaurantCount = 10000000;
 const filename = 'Restaurant.csv';
 const stream = fs.createWriteStream(filename);
 
 const packageRestaurant = (i) => {
 
-    const openingTime = faker.random.number({
-      min: 9,
-      max: 13,
-    });
+  const openingTime = faker.random.number({
+    min: 9,
+    max: 13,
+  });
 
-    const closingTime = faker.random.number({
-      min: 20,
-      max: 23,
-    });
+  const closingTime = faker.random.number({
+    min: 20,
+    max: 23,
+  });
   return `${openingTime},${closingTime}\n`;
 };
 
-(async() => {
+(async () => {
   for (let i = 0; i <= restaurantCount; i += 1) {
-      const Restaurant = packageRestaurant(i);
-      if (!stream.write(Restaurant)) {
-        await new Promise(resolve => stream.once('drain', resolve));
+    const Restaurant = packageRestaurant(i);
+    if (!stream.write(Restaurant)) {
+      await new Promise(resolve => stream.once('drain', resolve));
 
     }
-    console.log( `data generated  ${i} records`)
+
 
   }
 })();
+console.log(`data generated`);

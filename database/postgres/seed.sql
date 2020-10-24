@@ -6,4 +6,4 @@ COPY users (firstName, lastName, email, phoneNumber) FROM '/Users/haneenamro/SDC
 COPY restaurant (openingTime, closingTime ) FROM '/Users/haneenamro/SDC/calendar-reservation/Restaurant.csv' DELIMITER ',' CSV header;
 
 
-COPY reservation (people, reservationDate, reservationMonth, reservationDay, reservationTimes, currentYear, available, notes,restaurantId,usrId) FROM '/Users/haneenamro/SDC/calendar-reservation/Reservation.csv' DELIMITER ',' CSV header;
+COPY reservation (people, reservationDate, reservationMonth, reservationDay, reservationTime, currentYear,  notes,restaurantId,usrId) FROM '/Users/haneenamro/SDC/calendar-reservation/Reservation.csv' DELIMITER ',' CSV header ;

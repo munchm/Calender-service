@@ -1,4 +1,5 @@
-const db = require('../database');
+/* eslint-disable max-len */
+const db = require('../database/postgres');
 
 const getData = (cb) => {
   const q = 'SELECT * FROM reservation';
@@ -7,43 +8,44 @@ const getData = (cb) => {
 };
 
 const getRestaurant = (id, cb) => {
-  console.log(id)
-  const q = `SELECT * FROM reservation WHERE restaurantId = (?)`;
+  console.log(id);
+  const q = `select * from reservation join restaurant on reservation.restaurantId =  restaurant.restaurantId  join users on reservation.usrId = users.usrId where reservation.restaurantId = ${id}`;
 
-  db.query(q, [id], cb);
+  db.query(q, cb);
 };
 
-const postReservation  = (data , cb) => {
+const postReservation = (reservation, cb) => {
+  const {
+    // eslint-disable-next-line max-len
+    people, reservationdate, reservationmonth, reservationday, reservationtime, currentyear, notes, restaurantid, usrid,
+  } = reservation;
 
-  const {restaurantId , reservationDate , reservationMonth, reservationDay,reservationTimes, currentYear,  available, people, firstName, lastName , email,phoneNumber, notes, openingTime, closingTime } = data;
+  const q = `insert into reservation (people , reservationDate, reservationMonth, reservationDay, reservationTime, currentYear, notes, restaurantId, usrId) values ('${people}', '${reservationdate}', '${reservationmonth}', '${reservationday}' ,'${reservationtime}', '${currentyear}', '${notes}' , ${restaurantid} ,${usrid} ) `;
 
-  const q =`INSERT INTO reservation (restaurantId , reservationDate , reservationMonth, reservationDay,reservationTimes, currentYear,  available, people, firstName, lastName , email,phoneNumber, notes, openingTime, closingTime ) VALUES (?, ?, ?, ? ,?, ?, ? , ? , ? ,? ,? ,? ,?, ?, ?) `
+  db.query(q, cb);
+};
 
-  db.query(q, [restaurantId ,reservationDate , reservationMonth, reservationDay,reservationTimes, currentYear,  available, people, firstName, lastName , email,phoneNumber, notes, openingTime, closingTime ] ,cb);
+const deleteReservation = (id, cb) => {
+  console.log('delete me ');
+  const q = `DELETE FROM reservation WHERE reservation.restaurantId = ${id} `;
+  db.query(q, cb);
+};
 
-}
+const updateData = (id, data, cb) => {
+  const { notes } = data;
 
-const deleteReservation = (id , cb) => {
+  const q = ` UPDATE reservation SET notes = '${notes}'
+    WHERE reservation.usrId = ${id} ;
+  `;
 
-  const q = `DELETE FROM reservation WHERE restaurantId = ? `
-  db.query(q, [id], cb);
-}
-
-const updateData = (id , data , cb) => {
-  const firstName = data.firstName ;
-
-  const q =`UPDATE reservation SET firstName = ?
-  WHERE restaurantId = ? `
-
-  db.query(q, [firstName , id ], cb);
-}
+  db.query(q, cb);
+};
 
 module.exports = {
   getData,
   getRestaurant,
   postReservation,
   deleteReservation,
-  updateData
-
+  updateData,
 
 };

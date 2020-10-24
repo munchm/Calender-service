@@ -37,28 +37,28 @@
 const faker = require('faker');
 const fs = require('fs');
 
-const userCount = 1000000;
+const userCount = 5000000;
 const filename = 'Users.csv';
 const stream = fs.createWriteStream(filename);
 
 const packageUser = (i) => {
-    const firstName = faker.name.firstName();
-    const lastName = faker.name.lastName();
-    const email=  faker.internet.email();
-    const phoneNumber = faker.phone.phoneNumberFormat();
+  const firstName = faker.name.firstName();
+  const lastName = faker.name.lastName();
+  const email = faker.internet.email();
+  const phoneNumber = faker.phone.phoneNumberFormat();
   return `${firstName},${lastName},${email},${phoneNumber}\n`;
 };
 
-(async() => {
+(async () => {
   for (let i = 0; i <= userCount; i += 1) {
-      const users = packageUser(i);
-      if (!stream.write(users)) {
-        await new Promise(resolve => stream.once('drain', resolve));
+    const users = packageUser(i);
+    if (!stream.write(users)) {
+      await new Promise(resolve => stream.once('drain', resolve));
 
     }
-    console.log(`generated ${i}`);
+
   }
 
 
 })();
-
+console.log(`generated`);
