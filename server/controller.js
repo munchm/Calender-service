@@ -24,7 +24,6 @@ const getRestaurant = (req, res) => {
 
 const postReservation = (req, res) => {
   const reservation = req.body;
-  console.log(reservation);
   modelHandler.postReservation(reservation, (err) => {
     if (err) {
       res.status(400).send();

@@ -28,3 +28,4 @@ bundle.js
 docker-compose-build.yml
 
 *.csv
+newrelic.js

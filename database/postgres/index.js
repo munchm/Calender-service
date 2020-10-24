@@ -1,10 +1,11 @@
 const { Client } = require('pg');
+
 const config = {
   database: 'calendar',
-}
+};
 const client = new Client(config);
 
-client.connect( (err) => {
+client.connect((err) => {
   if (err) {
     console.log('Connection Err', err);
   } else {
