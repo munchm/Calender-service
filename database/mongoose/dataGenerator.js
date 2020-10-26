@@ -123,7 +123,7 @@ const packageReservation = (i) => {
     if (!stream.write(Reservation)) {
       await new Promise(resolve => stream.once('drain', resolve));
 
-    }
+}
 
   }
 
